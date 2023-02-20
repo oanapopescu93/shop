@@ -1,2 +1,2 @@
 # shop
-ecommerce website
+ecommerce website (NodeJS and ReactJS)
