@@ -7,8 +7,7 @@ import Sort from './sort'
 import ProductList from './productList'
 
 function Products(props) {
-	return <div className="products_container">
-    <Container fluid>						
+	return <Container fluid className="container_box products_container">						
       <Row>
         <Col lg={2} md={3} sm={3} className="panel_container">
           <Panel lang={props.lang} categories={props.categories}></Panel>
@@ -29,7 +28,6 @@ function Products(props) {
         </Col>
       </Row>
     </Container>
-  </div>
 }
 
 export default Products

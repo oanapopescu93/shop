@@ -3,7 +3,7 @@ import ProductDetails from './productDetails'
 
 function ProductPage(props){ 
 	return (
-		<div className="product_page_container">
+		<div className="container_box product_page_container">
       <ProductDetails lang={props.lang} socket={props.socket} product={props.product}></ProductDetails>
     </div>
 	)

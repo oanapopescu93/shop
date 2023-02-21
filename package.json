@@ -2,7 +2,7 @@
   "name": "shop_project",
   "version": "1.0.0",
   "description": "react project",
-  "homepage": "https://bunnybet.herokuapp.com",
+  "homepage": "",
   "engines": {
     "node": "10.15.3"
   },

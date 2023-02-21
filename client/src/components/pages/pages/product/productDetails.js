@@ -62,72 +62,70 @@ function ProductDetails(props){
 	}
 	
 	return (
-		<div className="product_container">
-			<Container fluid>						
-				<Row>
-					<Col lg={4} md={4} sm={6}>
-						<div className="product_img">
-							<img src={img} alt="product"/>
-							{discount > 0 ? <div className="discount">{discount}%</div> : null}
-            			</div>
-					</Col>
-					<Col lg={8} md={8} sm={6}>
-						<h2>{title}</h2>
-						<Stars stars={star_array}></Stars>
-						<div className="product_category_container">
-							<p>
-								{lang === "ro" ? <span>Categorie: </span> : <span>Category: </span>}
-								{category ? <span className="tag product_type">{category}</span> : null}
-								{subcategory ? <span className="tag product_type">{subcategory}</span> : null}
-								{type ? <span className="tag product_type">{type}</span> : null}
-							</p>
-						</div>
+		<Container fluid className="container_box product_container">						
+			<Row>
+				<Col lg={4} md={4} sm={6}>
+					<div className="product_img">
+						<img src={img} alt="product"/>
+						{discount > 0 ? <div className="discount">{discount}%</div> : null}
+					</div>
+				</Col>
+				<Col lg={8} md={8} sm={6}>
+					<h2>{title}</h2>
+					<Stars stars={star_array}></Stars>
+					<div className="product_category_container">
+						<p>
+							{lang === "ro" ? <span>Categorie: </span> : <span>Category: </span>}
+							{category ? <span className="tag product_type">{category}</span> : null}
+							{subcategory ? <span className="tag product_type">{subcategory}</span> : null}
+							{type ? <span className="tag product_type">{type}</span> : null}
+						</p>
+					</div>
 
-						<div className="product_prices">
-							{price_old > 0 ? <>                  
-							<span className="product_price_old">{price_old}</span>
-							<span className="product_price_new">{price}</span>
-							</> : <span className="product_price">{price}</span>}
-						</div>
+					<div className="product_prices">
+						{price_old > 0 ? <>                  
+						<span className="product_price_old">{price_old}</span>
+						<span className="product_price_new">{price}</span>
+						</> : <span className="product_price">{price}</span>}
+					</div>
 
-						<div className="product_description_short">
-							<p>{description_short}</p>
-						</div>						
-						
-						<div className="shop_button_container">
-							<Button className="shop_button" type="button" onClick={()=>{addToCart(product)}}><i class="fa fa-shopping-basket" aria-hidden="true"></i> {lang === "ro" ? <span>Adauga in cos</span> : <span>Add to cart</span>} </Button>        
-							<Button className="shop_button" type="button" onClick={()=>{addToWishlist(product)}}><i class="fa fa-heart" aria-hidden="true"></i> {lang === "ro" ? <span>Add to wishlist</span> : <span>Adauga in Wishlist</span>} </Button>        
+					<div className="product_description_short">
+						<p>{description_short}</p>
+					</div>						
+					
+					<div className="shop_button_container">
+						<Button className="shop_button" type="button" onClick={()=>{addToCart(product)}}><i class="fa fa-shopping-basket" aria-hidden="true"></i> {lang === "ro" ? <span>Adauga in cos</span> : <span>Add to cart</span>} </Button>        
+						<Button className="shop_button" type="button" onClick={()=>{addToWishlist(product)}}><i class="fa fa-heart" aria-hidden="true"></i> {lang === "ro" ? <span>Add to wishlist</span> : <span>Adauga in Wishlist</span>} </Button>        
+					</div>
+				</Col>
+			</Row>
+			<Row>
+				<Col sm={12} className="product_more_info">
+					<ul className="nav nav-tabs" role="tablist">
+						<li className="nav-item">
+							<a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">First Panel</a>
+						</li>
+						<li className="nav-item">
+							<a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Second Panel</a>
+						</li>
+						<li className="nav-item">
+							<a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Third Panel</a>
+						</li>
+					</ul>
+					<div className="tab-content">
+						<div className="tab-pane active" id="tabs-1" role="tabpanel">
+							<ProductDescription lang={lang} description={description_long}></ProductDescription>
 						</div>
-					</Col>
-				</Row>
-				<Row>
-					<Col sm={12} className="product_more_info">
-						<ul className="nav nav-tabs" role="tablist">
-							<li className="nav-item">
-								<a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">First Panel</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Second Panel</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Third Panel</a>
-							</li>
-						</ul>
-						<div className="tab-content">
-							<div className="tab-pane active" id="tabs-1" role="tabpanel">
-								<ProductDescription lang={lang} description={description_long}></ProductDescription>
-							</div>
-							<div className="tab-pane" id="tabs-2" role="tabpanel">
-								<ProductAditionalInformation lang={lang}></ProductAditionalInformation>
-							</div>
-							<div className="tab-pane" id="tabs-3" role="tabpanel">
-								<ProductReviews lang={lang}></ProductReviews>
-							</div>
+						<div className="tab-pane" id="tabs-2" role="tabpanel">
+							<ProductAditionalInformation lang={lang}></ProductAditionalInformation>
 						</div>
-					</Col>
-				</Row>
-			</Container>
-		</div>
+						<div className="tab-pane" id="tabs-3" role="tabpanel">
+							<ProductReviews lang={lang}></ProductReviews>
+						</div>
+					</div>
+				</Col>
+			</Row>
+		</Container>
 	)
 }
 

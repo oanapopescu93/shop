@@ -7,7 +7,7 @@ function Not_found(props) {
     window.location.href = "/"
   }    
 	return ( 
-    <div className="not_found_container">
+    <div className="container_box not_found_container">
       <div className="not_found">
         <h1>404</h1>
         {lang === "ro" ? <h2>Pagina nu exista</h2> : <h2>Page not found</h2>}  

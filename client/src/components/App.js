@@ -38,6 +38,7 @@ function App(props){
 
 	const [loading, setLoading] = useState(true)
 	const [data, setData] = useState(null)	
+	const [dataPromo, setDataPromo] = useState(null)	
 	const [contact, setContact] = useState(null)	
 	const [shipping, setShipping] = useState(null)	
 	let lang = useSelector(state => state.language)
@@ -50,6 +51,7 @@ function App(props){
 		socket.on('homepage_read', function(res){
 			if(res){
 				let array = res.products
+				let array_promo = []
 				for(let i in array){
 					for(let j in productImages){
 						if(array[i].id === productImages[j].id){
@@ -58,6 +60,12 @@ function App(props){
 					}
 				}
 				setData(array)
+				for(let i in array){
+					if(res.promo_products.includes(array[i].id)){
+						array_promo.push(array[i])
+					}
+				}
+				setDataPromo(array_promo)
 				setContact(res.contact)
         		setCategories(res.categories[0])
 				setShipping(res.shipping)
@@ -74,7 +82,7 @@ function App(props){
         <BrowserRouter>
           <Switch>
             <Route exact path="/">
-            <Page lang={lang} socket={socket} products={data} categories={categories} contact={contact} shipping={shipping}></Page>
+            <Page lang={lang} socket={socket} products={data} promo_list={dataPromo} categories={categories} contact={contact} shipping={shipping}></Page>
           </Route>
           <Route path="*">
             <NotFound lang={lang}></NotFound>

@@ -89,6 +89,7 @@ function Page(props) {
       <Navbar lang={props.lang} category={props.categories}></Navbar>
       {(() => { 
         if(page){
+          return <Checkout cart={cart} lang={props.lang} socket={props.socket} shipping={props.shipping}></Checkout>
           switch (page.name) {
             case "sign":
               return <Sign lang={props.lang} socket={props.socket}></Sign> 
@@ -108,7 +109,7 @@ function Page(props) {
               return <Products lang={props.lang} products={products} categories={props.categories} filter={filter}></Products>
             case "home":
             default:
-                return <Homepage lang={props.lang}></Homepage>
+                return <Homepage lang={props.lang} promo_list={props.promo_list}></Homepage>
           }
         } else {
           return <Homepage lang={props.lang}></Homepage>
