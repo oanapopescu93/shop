@@ -191,7 +191,7 @@ img{
 	border-radius: 100%!important;
 }
 .checkbox_radio_container input[type="checkbox"] {
-	border-radius: 0px!important;
+	border-radius: var(--border_radius_5)!important;
 }
 
 .checkbox_radio_container input[type="radio"]::before{
@@ -945,6 +945,12 @@ img{
 #checkout_form .dropdown-toggle,
 #checkout_form .dropdown-menu{
 	width: 100%;
+}
+.form_error{
+	font-size: 12px;
+	line-height: 12px;
+	color: var(--red);
+	display: none;
 }
 
 /* SIGN */

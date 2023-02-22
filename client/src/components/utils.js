@@ -139,3 +139,28 @@ export const getProductImages = function(){
     {img: product_06, id:6},
   ]
 }
+
+export const checkoutData = function(){	
+  const countries = [
+    {value: "CA", text: "Canada"},
+    {value: "MX", text: "Mexico"},
+    {value: "US", text: "United States"}
+  ]
+  const monthOptions = [
+    {value: 0, text: "January"},
+    {value: 1, text: "February"},
+    {value: 2, text: "March"},
+    {value: 3, text: "April"},
+    {value: 4, text: "May"},
+    {value: 5, text: "June"},
+    {value: 6, text: "July"},
+    {value: 7, text: "August"},
+    {value: 8, text: "September"},
+    {value: 9, text: "October"},
+    {value: 10, text: "November"},
+    {value: 11, text: "December"},
+  ]
+  let date = new Date().getFullYear()-1;
+  const yearOptions = Array.from({length: 10}, (_, i) => i + date)
+  return {countries, monthOptions, yearOptions}
+}

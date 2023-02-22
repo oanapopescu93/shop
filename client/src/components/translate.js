@@ -26,7 +26,8 @@ var words = {
         "month": "Month",
         "year": "Year",  
         "cvv": "cvv",
-        "billing_info": "Billing info",      
+        "billing_info": "Billing info",   
+        "billing_info_same": "Billing address same as shipping",     
 
         "January": "January", 
         "February": "February", 
@@ -69,7 +70,8 @@ var words = {
         "month": "Luna",
         "year": "An",
         "cvv": "cvv",
-        "billing_info": "Date facturare",    
+        "billing_info": "Date facturare",  
+        "billing_info_same": "Adresa de facturare aceeasi ca si expedierea",  
 
         "January": "Ianuarie", 
         "February": "Februarie", 
