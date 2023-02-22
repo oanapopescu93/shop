@@ -96,7 +96,7 @@ img{
 	padding-bottom: 50px;
 }
 
-/* buttons */
+/* buttons and inputs*/
 .button_color, .button_color:hover, .button_color:focus, .button_color:hover:active{
 	background-color:var(--button_color_bg);
 	color:var(--button_color_text);
@@ -167,6 +167,66 @@ img{
 	font-size: 12px;
 	line-height: 12px;
 	padding: var(--padding_box_5);
+}
+
+/* checkbox and radio buttons */
+.checkbox_radio_container input[type="radio"], .checkbox_radio_container input[type="checkbox"] {
+	/* Add if not using autoprefixer */
+	-webkit-appearance: none;
+	appearance: none;
+	/* For iOS < 15 to remove gradient background */
+	background-color: #fff;
+	/* Not removed via appearance */
+	appearance: none;
+    margin: 0px 5px 0px 0px;
+    padding: 0px !important;
+    width: 20px;
+    height: 20px;
+	border-radius: 100%!important;
+	transform: translateY(3px);
+	display: grid;
+  	place-content: center;
+}
+.checkbox_radio_container input[type="radio"]{
+	border-radius: 100%!important;
+}
+.checkbox_radio_container input[type="checkbox"] {
+	border-radius: 0px!important;
+}
+
+.checkbox_radio_container input[type="radio"]::before{
+	content: "";
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	transform: scale(0);
+	transition: 120ms transform ease-in-out;
+	box-shadow: inset 1em 1em var(--color);
+	background-color: CanvasText;
+}
+.checkbox_radio_container input[type="checkbox"]::before {
+	content: "";
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	transform: scale(0);
+	transition: 120ms transform ease-in-out;
+	box-shadow: inset 1em 1em var(--color);
+	background-color: CanvasText;
+	transform-origin: bottom left;
+  	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.checkbox_radio_container input[type="radio"]:checked::before, .checkbox_radio_container input[type="checkbox"]:checked::before {
+	transform: scale(1);
+}
+.checkbox_radio_container input[type="radio"]:focus, .checkbox_radio_container input[type="checkbox"]:focus {
+	outline: max(2px, 0.15em) solid currentColor;
+}
+.checkbox_radio_container label{
+	display: inline-flex;
+    grid-template-columns: 20px auto;
+    gap: 10px;
+	margin:5px!important
 }
 
 /* SLIDER */

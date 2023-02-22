@@ -59,24 +59,24 @@ function Checkout(props) {
                     <Row>
                         <Col sm={4}>
                             <label for="firstname">{translate({lang: props.lang, info: "firstname"})}</label>
-                            <input type="text" class="form-control" placeholder={translate({lang: props.lang, info: "firstname"})} id="firstname" required/>
+                            <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "firstname"})} id="firstname" required/>
                             <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                         </Col>
                         <Col sm={4}>
                             <label for="lastname">{translate({lang: props.lang, info: "lastname"})}</label>
-                            <input type="text" class="form-control" placeholder={translate({lang: props.lang, info: "lastname"})} id="lastname" required/>
+                            <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "lastname"})} id="lastname" required/>
                             <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                         </Col>
                         <Col sm={4}>
                             <label for="email">{translate({lang: props.lang, info: "email"})}</label>
-                            <input type="email" class="form-control" placeholder={translate({lang: props.lang, info: "email"})} id="email" required/>
+                            <input type="email" className="form-control" placeholder={translate({lang: props.lang, info: "email"})} id="email" required/>
                             <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                         </Col>
                     </Row>
                     <Row>
                         <Col sm={8}>
                             <label for="address">{translate({lang: props.lang, info: "address"})}</label>
-                            <input type="text" class="form-control" placeholder={translate({lang: props.lang, info: "address"})} id="address" required/>
+                            <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "address"})} id="address" required/>
                             <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                         </Col>
                         <Col sm={4}>
@@ -96,17 +96,17 @@ function Checkout(props) {
                     <Row>
                         <Col sm={5}>
                             <label for="town_city">{translate({lang: props.lang, info: "town_city"})}</label>
-                            <input type="text" class="form-control" placeholder={translate({lang: props.lang, info: "town_city"})} id="town_city" required/>
+                            <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "town_city"})} id="town_city" required/>
                             <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                         </Col>
                         <Col sm={5}>
                             <label for="county_state">{translate({lang: props.lang, info: "county_state"})}</label>
-                            <input type="text" class="form-control" placeholder={translate({lang: props.lang, info: "county_state"})} id="county_state" required/>
+                            <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "county_state"})} id="county_state" required/>
                             <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                         </Col>
                         <Col sm={2}>
                             <label for="postal_zip_code">{translate({lang: props.lang, info: "postal_zip_code"})}</label>
-                            <input type="number" class="form-control" placeholder="00000" id="postal_zip_code" required/>
+                            <input type="number" className="form-control" placeholder="00000" id="postal_zip_code" required/>
                             <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                         </Col>
                     </Row>
@@ -119,14 +119,24 @@ function Checkout(props) {
                         <Col sm={8}>
                             <Row>
                                 <Col sm={12}>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="optradio" checked/>Test Gateway
+                                <div className="checkbox_radio_container">
+                                        <label>
+                                            <input type="radio" name="radio"/>
+                                            Test Gateway
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="radio" />
+                                            Credit Card
                                         </label>
                                     </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="optradio"/>Credit Card
+                                    <div className="checkbox_radio_container">
+                                        <label>
+                                            <input type="checkbox" name="checkbox" />
+                                            Test Gateway
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="checkbox"/>
+                                            Credit Card
                                         </label>
                                     </div>
                                 </Col>
@@ -134,7 +144,7 @@ function Checkout(props) {
                             <Row>
                                 <Col sm={12}>
                                     <label for="card_number">{translate({lang: props.lang, info: "card_number"})}</label>
-                                    <input type="text" class="form-control" placeholder={translate({lang: props.lang, info: "card_number"})} id="card_number" required/>
+                                    <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "card_number"})} id="card_number" required/>
                                     <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                                 </Col>
                             </Row>
@@ -167,7 +177,7 @@ function Checkout(props) {
                                 </Col>
                                 <Col sm={4}>
                                     <label for="cvv">{translate({lang: props.lang, info: "cvv"})}</label>
-                                    <input type="text" class="form-control" placeholder={translate({lang: props.lang, info: "cvv"})} id="cvv" required/>
+                                    <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "cvv"})} id="cvv" required/>
                                     <div className="invalid-feedback">{translate({lang: props.lang, info: "fill_field"})}</div>
                                 </Col>
                             </Row>
