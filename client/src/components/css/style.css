@@ -946,11 +946,17 @@ img{
 #checkout_form .dropdown-menu{
 	width: 100%;
 }
-.form_error{
+#checkout_form .dropdown-menu{
+	max-height: 200px;
+	overflow-y: auto;
+}
+#checkout_form .form_error{
 	font-size: 12px;
 	line-height: 12px;
 	color: var(--red);
-	display: none;
+}
+#checkout_form .dropdown-toggle.color{
+	height: 32px;
 }
 
 /* SIGN */

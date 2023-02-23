@@ -4,38 +4,165 @@ import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import Button from 'react-bootstrap/Button'
 import { translate } from '../../../translate'
-import { checkoutData } from '../../../utils'
+import { checkoutData, isEmpty } from '../../../utils'
+import { check_submit, validateCard, validateCVV } from '../../../validate'
 
 function Checkout(props) {
-    const [country, setCountry] = useState({value: "", text: ""})    
-    const [countryBilling, setCountryBilling] = useState({value: "", text: ""})    
+    const [country, setCountry] = useState("")    
+    const [countryBilling, setCountryBilling] = useState("")    
     const [month, setMonth] = useState({value: "", text: ""})    
     const [year, setYear] = useState("") 
+    const [city, setCity] = useState("")    
+    const [cityBilling, setCityBilling] = useState("")   
+    const [cityList, setCityList] = useState([])    
+    const [cityListBilling, setCityListBilling] = useState([])   
 
-    const [checkedBillingAddress, setCheckedBillingAddress] = useState(false) 
+    const [checkedBillingAddress, setCheckedBillingAddress] = useState(true) 
     const [radioOne, setRadioOne] = useState(true) 
     const [radioTwo, setRadioTwo] = useState(false)
 
-    const countries = checkoutData().countries
+    const countries_json = checkoutData().countries
+    const countries = checkoutData().countries_list
     const monthOptions = checkoutData().monthOptions
     const yearOptions = checkoutData().yearOptions
+
+    const [firstnameError, setFirstnameError] = useState(false)
+    const [lastnameError, setLastnameError] = useState(false)
+    const [phoneError, setPhoneError] = useState(false)
+    const [emailError, setEmailError] = useState(false)
+    const [addressError, setAddressError] = useState(false)
+    const [countryError, setCountryError] = useState(false)   
+    const [cityError, setCityError] = useState(false)   
+    const [postalZipCodeError, setPostalZipCodeError] = useState(false)
+    const [cardNumberError, setCardNumberError] = useState(false)
+    const [cvvError, setCvvError] = useState(false)
+    const [monthError, setMonthError] = useState(false)   
+    const [yearError, setYearError] = useState(false)     
+    
+    const [addressBillingError, setAddressBillingError] = useState(false)
+    const [countryBillingError, setCountryBillingError] = useState(false)   
+    const [cityBillingError, setCityBillingError] = useState(false)   
+    const [postalZipCodeBillingError, setPostalZipCodeBillingError] = useState(false)
     
     function submit(e){
+        refreshErrors()
         e.preventDefault()
-        let formData = new FormData(e.target);
-        let payload = Object.fromEntries(formData)
-        console.log(payload)
+        let formData = new FormData(e.target)
+        let data = Object.fromEntries(formData)  
+        validate(data)        
     }   
     
-    function validate(){
-        
+    function validate(data){
+        let problem = false
+        if(isEmpty(data.firstname)){
+            setFirstnameError(true)
+            problem = true
+        }
+        if(isEmpty(data.lastname)){
+            setLastnameError(true)
+            problem = true
+        }
+        if(!check_submit(data.phone, "phone")){
+            setPhoneError(true)
+            problem = true
+        }
+        if(!check_submit(data.email, "email")){
+            setEmailError(true)
+            problem = true
+        }        
+        if(isEmpty(data.address)){
+            setAddressError(true)
+            problem = true
+        }    
+        if(isEmpty(country)){
+            setCountryError(true)
+            problem = true
+        }
+        if(isEmpty(city)){
+            setCityError(true)
+            problem = true
+        } 
+        if(isEmpty(data.postal_zip_code)){
+            setPostalZipCodeError(true)
+            problem = true
+        }
+        if(!validateCard(data.card_number)){
+            setCardNumberError(true)
+            problem = true
+        }     
+        if(!validateCVV(data.card_number, data.cvv)){
+            setCvvError(true)
+            problem = true
+        }
+        if(isEmpty(month.text)){
+            setMonthError(true)
+            problem = true
+        }        
+        if(isEmpty(year)){
+            setYearError(true)
+            problem = true
+        }
+        if(!data.billing_info_same){                
+            if(isEmpty(data.address_billing)){
+                setAddressBillingError(true)
+                problem = true
+            }
+            if(isEmpty(countryBilling)){
+                setCountryBillingError (true)
+                problem = true
+            }
+            if(isEmpty(cityBilling)){
+                setCityBillingError(true)
+                problem = true
+            } 
+            if(isEmpty(data.postal_zip_code_billing)){
+                setPostalZipCodeBillingError(true)
+                problem = true
+            }   
+        }
+
+        if(!problem){
+            let payload = data
+            sendPayload(payload)
+        }
     }
+    function sendPayload(payload){
+        console.log(payload)
+    }
+
+    function refreshErrors(){
+        setFirstnameError(false)
+        setLastnameError(false)
+        setPhoneError(false)
+        setEmailError(false)
+        setAddressError(false)
+        setCountryError(false)
+        setCityError(false)
+        setPostalZipCodeError(false)
+        setCardNumberError(false)
+        setCvvError(false)
+        setMonthError(false)
+        setYearError(false)        
+        setAddressBillingError(false)
+        setCountryBillingError(false)
+        setCityBillingError(false)
+        setPostalZipCodeBillingError(false)
+    }   
 
     function changeCountry(x, billing=false){
         if(billing){
             setCountryBilling(x)
+            setCityListBilling(countries_json[x])
         } else {
             setCountry(x)
+            setCityList(countries_json[x])
+        }
+    }
+    function changeCity(x, billing=false){
+        if(billing){
+            setCityBilling(x)
+        } else {
+            setCity(x)
         }
     }
     function changeMonth(x){
@@ -67,58 +194,65 @@ function Checkout(props) {
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={4}>
-                            <label for="firstname">{translate({lang: props.lang, info: "firstname"})}</label>
+                        <Col sm={3}>
+                            <label htmlFor="firstname">{translate({lang: props.lang, info: "firstname"})}</label>
                             <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "firstname"})} id="firstname" name="firstname"/>
-                            <div id="form_error_firstname" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                            {firstnameError ? <div id="form_error_firstname" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                         </Col>
-                        <Col sm={4}>
-                            <label for="lastname">{translate({lang: props.lang, info: "lastname"})}</label>
+                        <Col sm={3}>
+                            <label htmlFor="lastname">{translate({lang: props.lang, info: "lastname"})}</label>
                             <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "lastname"})} id="lastname" name="lastname"/>
-                            <div id="form_error_lastname" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                            {lastnameError ? <div id="form_error_lastname" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                         </Col>
-                        <Col sm={4}>
-                            <label for="email">{translate({lang: props.lang, info: "email"})}</label>
-                            <input type="email" className="form-control" placeholder={translate({lang: props.lang, info: "email"})} id="email" name="email"/>
-                            <div id="form_error_email" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                        <Col sm={3}>
+                            <label htmlFor="phone">{translate({lang: props.lang, info: "phone"})}</label>
+                            <input type="text" className="form-control" placeholder="(+40)711.111.111" id="phone" name="phone"/>
+                            {phoneError ? <div id="form_error_phone" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
+                        </Col>
+                        <Col sm={3}>
+                            <label htmlFor="email">{translate({lang: props.lang, info: "email"})}</label>
+                            <input type="email" className="form-control" placeholder="text@text.text" id="email" name="email"/>
+                            {emailError ? <div id="form_error_email" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={8}>
-                            <label for="address">{translate({lang: props.lang, info: "address"})}</label>
+                        <Col sm={3}>
+                            <label htmlFor="address">{translate({lang: props.lang, info: "address"})}</label>
                             <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "address"})} id="address" name="address"/>
-                            <div id="form_error_address" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                            {addressError ? <div id="form_error_address" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                         </Col>
-                        <Col sm={4}>
+                        <Col sm={3}>
                             <label>{translate({lang: props.lang, info: "country"})}</label>
                             <div className="dropdown">
                                 <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span>{country.text}</span>
+                                    <span>{country}</span>
                                 </button>
                                 <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
                                     {countries.map(function(x, i){
-                                        return <li key={i} onClick={()=>{changeCountry(x, false)}}><span>{x.text}</span></li>
+                                        return <li key={i} onClick={()=>{changeCountry(x, false)}}><span>{x}</span></li>
                                     })}
                                 </ul>
                             </div>
-                            <div id="form_error_country" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                            {countryError ? <div id="form_error_country" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={5}>
-                            <label for="town_city">{translate({lang: props.lang, info: "town_city"})}</label>
-                            <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "town_city"})} id="town_city" name="town_city"/>
-                            <div id="form_error_town_city" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                        <Col sm={3}>
+                            <label>{translate({lang: props.lang, info: "town_city"})}</label>
+                            <div className="dropdown">
+                                <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span>{city}</span>
+                                </button>
+                                <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
+                                    {cityList.map(function(x, i){
+                                        return <li key={i} onClick={()=>{changeCity(x, false)}}><span>{x}</span></li>
+                                    })}
+                                </ul>
+                            </div>
+                            {cityError ? <div id="form_error_country" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                         </Col>
-                        <Col sm={5}>
-                            <label for="county_state">{translate({lang: props.lang, info: "county_state"})}</label>
-                            <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "county_state"})} id="county_state" name="county_state"/>
-                            <div id="form_error_county_state" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
-                        </Col>
-                        <Col sm={2}>
-                            <label for="postal_zip_code">{translate({lang: props.lang, info: "postal_zip_code"})}</label>
-                            <input type="number" className="form-control" placeholder="00000" id="postal_zip_code" name="postal_zip_code"/>
-                            <div id="form_error_postal_zip_code" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                        <Col sm={3}>
+                            <label htmlFor="postal_zip_code">{translate({lang: props.lang, info: "postal_zip_code"})}</label>
+                            <input type="text" className="form-control" placeholder="00000" id="postal_zip_code" name="postal_zip_code"/>
+                            {postalZipCodeError ? <div id="form_error_postal_zip_code" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                         </Col>
                     </Row>
                     <Row>
@@ -144,9 +278,9 @@ function Checkout(props) {
                             </Row>
                             <Row>
                                 <Col sm={12}>
-                                    <label for="card_number">{translate({lang: props.lang, info: "card_number"})}</label>
-                                    <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "card_number"})} id="card_number" name="card_number"/>
-                                    <div id="form_error_card_number" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                                    <label htmlFor="card_number">{translate({lang: props.lang, info: "card_number"})}</label>
+                                    <input type="text" className="form-control" placeholder="XXXX XXXX XXXX XXXX" id="card_number" name="card_number"/>
+                                    {cardNumberError ? <div id="form_error_card_number" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                                 </Col>
                             </Row>
                             <Row>
@@ -162,10 +296,10 @@ function Checkout(props) {
                                             })}
                                         </ul>
                                     </div>
-                                    <div id="form_error_month" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                                    {monthError ? <div id="form_error_month" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                                 </Col>
                                 <Col sm={4}>
-                                    <label>{translate({lang: props.lang, info: "month"})}</label>
+                                    <label>{translate({lang: props.lang, info: "year"})}</label>
                                     <div className="dropdown">
                                         <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span>{year ? year : <>{translate({lang: props.lang, info: "year"})}</>}</span>
@@ -176,12 +310,12 @@ function Checkout(props) {
                                             })}
                                         </ul>
                                     </div>
-                                    <div id="form_error_year" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                                    {yearError ? <div id="form_error_year" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                                 </Col>
                                 <Col sm={4}>
-                                    <label for="cvv">{translate({lang: props.lang, info: "cvv"})}</label>
-                                    <input type="number" className="form-control" placeholder={translate({lang: props.lang, info: "cvv"})} id="cvv" name="cvv"/>
-                                    <div id="form_error_cvv" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                                    <label htmlFor="cvv">{translate({lang: props.lang, info: "cvv"})}</label>
+                                    <input type="text" className="form-control" placeholder="123" id="cvv" name="cvv"/>
+                                    {cvvError ? <div id="form_error_cvv" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                                 </Col>
                             </Row>
                         </Col>
@@ -195,7 +329,7 @@ function Checkout(props) {
                         <Col sm={12}>
                             <div className="checkbox_radio_container">
                                 <label>
-                                    <input type="checkbox" name="checkbox" checked={checkedBillingAddress} onChange={()=>{handleChangeCheck("billing_info_same")}}/>
+                                    <input type="checkbox" name="billing_info_same" checked={checkedBillingAddress} onChange={()=>{handleChangeCheck("billing_info_same")}}/>
                                     {translate({lang: props.lang, info: "billing_info_same"})}
                                 </label>
                             </div>
@@ -203,60 +337,45 @@ function Checkout(props) {
                     </Row>
                     {!checkedBillingAddress ? <div id="billing_info_container">
                         <Row>
-                            <Col sm={4}>
-                                <label for="firstname_billing">{translate({lang: props.lang, info: "firstname"})}</label>
-                                <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "firstname"})} id="firstname_billing" name="firstname_billing"/>
-                                <div id="form_error_firstname_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
-                            </Col>
-                            <Col sm={4}>
-                                <label for="lastname_billing">{translate({lang: props.lang, info: "lastname"})}</label>
-                                <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "lastname"})} id="lastname_billing" name="lastname_billing"/>
-                                <div id="form_error_lastname_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
-                            </Col>
-                            <Col sm={4}>
-                                <label for="email_billing">{translate({lang: props.lang, info: "email"})}</label>
-                                <input type="email" className="form-control" placeholder={translate({lang: props.lang, info: "email"})} id="email_billing" name="email_billing"/>
-                                <div id="form_error_email_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col sm={8}>
-                                <label for="address_billing">{translate({lang: props.lang, info: "address"})}</label>
+                            <Col sm={3}>
+                                <label htmlFor="address_billing">{translate({lang: props.lang, info: "address"})}</label>
                                 <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "address"})} id="address_billing" name="address_billing"/>
-                                <div id="form_error_address_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                                {addressBillingError ? <div id="form_error_address_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                             </Col>
-                            <Col sm={4}>
+                            <Col sm={3}>
                                 <label>{translate({lang: props.lang, info: "country"})}</label>
                                 <div className="dropdown">
                                     <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span>{countryBilling.text}</span>
+                                        <span>{countryBilling}</span>
                                     </button>
                                     <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
                                         {countries.map(function(x, i){
-                                            return <li key={i} onClick={()=>{changeCountry(x, true)}}><span>{x.text}</span></li>
+                                            return <li key={i} onClick={()=>{changeCountry(x, true)}}><span>{x}</span></li>
                                         })}
                                     </ul>
                                 </div>
-                                <div id="form_error_country_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                                {countryBillingError ? <div id="form_error_country_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                             </Col>
-                        </Row>   
-                        <Row>
-                            <Col sm={5}>
-                                <label for="town_city_billing">{translate({lang: props.lang, info: "town_city"})}</label>
-                                <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "town_city"})} id="town_city_billing" name="town_city_billing"/>
-                                <div id="form_error_town_city_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                            <Col sm={3}>
+                                <label>{translate({lang: props.lang, info: "town_city"})}</label>
+                                <div className="dropdown">
+                                    <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span>{cityBilling}</span>
+                                    </button>
+                                    <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
+                                        {cityListBilling.map(function(x, i){
+                                            return <li key={i} onClick={()=>{changeCity(x, true)}}><span>{x}</span></li>
+                                        })}
+                                    </ul>
+                                </div>
+                                {cityBillingError ? <div id="form_error_country" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                             </Col>
-                            <Col sm={5}>
-                                <label for="county_state_billing">{translate({lang: props.lang, info: "county_state"})}</label>
-                                <input type="text" className="form-control" placeholder={translate({lang: props.lang, info: "county_state"})} id="county_state_billing" name="county_state_billing"/>
-                                <div id="form_error_county_state_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
-                            </Col>
-                            <Col sm={2}>
-                                <label for="postal_zip_code_billing">{translate({lang: props.lang, info: "postal_zip_code"})}</label>
+                            <Col sm={3}>
+                                <label htmlFor="postal_zip_code_billing">{translate({lang: props.lang, info: "postal_zip_code"})}</label>
                                 <input type="number" className="form-control" placeholder="00000" id="postal_zip_code_billing" name="postal_zip_code_billing"/>
-                                <div id="form_error_postal_zip_code_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div>
+                                {postalZipCodeBillingError ? <div id="form_error_postal_zip_code_billing" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                             </Col>
-                        </Row> 
+                        </Row>
                     </div> : null}
                     <Row>
                         <Col sm={12}>

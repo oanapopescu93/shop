@@ -4,6 +4,7 @@ import product_03 from './img/products/product-3.jpg'
 import product_04 from './img/products/product-4.jpg'
 import product_05 from './img/products/product-5.jpg'
 import product_06 from './img/products/product-6.jpg'
+import countries from './json/countries.json';
 
 export const isEmpty = function (element){
   let empty = true
@@ -141,11 +142,6 @@ export const getProductImages = function(){
 }
 
 export const checkoutData = function(){	
-  const countries = [
-    {value: "CA", text: "Canada"},
-    {value: "MX", text: "Mexico"},
-    {value: "US", text: "United States"}
-  ]
   const monthOptions = [
     {value: 0, text: "January"},
     {value: 1, text: "February"},
@@ -162,5 +158,7 @@ export const checkoutData = function(){
   ]
   let date = new Date().getFullYear()-1;
   const yearOptions = Array.from({length: 10}, (_, i) => i + date)
-  return {countries, monthOptions, yearOptions}
+  let countries_list = Object.keys(countries.countries)
+
+  return {countries_list, countries: countries.countries, monthOptions, yearOptions}
 }
