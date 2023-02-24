@@ -7,6 +7,7 @@ import Banner from './banner'
 import Categories from './category'
 import About from './about'
 import banner_image from '../../../img/banner_model.jpg'
+import { translate } from '../../../translate'
 
 function Homepage(props){
 	let lang = props.lang
@@ -17,7 +18,7 @@ function Homepage(props){
 		<Categories lang={lang}></Categories>
       	<Row>
 			<Col sm={12}>
-				{props.lang === "ro" ? <h4>Promo</h4> : <h4>Promo</h4>}
+				<h4>{translate({lang: props.lang, info: "promo"})}</h4>
 				<SliderList lang={lang} list={promo_list}></SliderList>
 			</Col>
         </Row>

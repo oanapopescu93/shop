@@ -89,7 +89,6 @@ function Page(props) {
       <Navbar lang={props.lang} category={props.categories}></Navbar>
       {(() => { 
         if(page){
-          return <Checkout cart={cart} lang={props.lang} socket={props.socket} shipping={props.shipping}></Checkout>
           switch (page.name) {
             case "sign":
               return <Sign lang={props.lang} socket={props.socket}></Sign> 

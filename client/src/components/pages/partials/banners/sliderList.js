@@ -2,15 +2,18 @@ import React from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useDispatch } from 'react-redux'
+import { page } from '../../../actions/actions'
 
 function CustomSlide(props){
-  const index = props.index
-  const title = props.elem.title
-  const img = props.elem.img
+  let dispatch = useDispatch()
+  function handleClick(name, details){
+    dispatch(page({name, details}))
+  }
   return (
-    <div className="customSlide" key={index}>
-      <h3>{title}</h3>
-      <img src={img} alt="CustomSlide" />
+    <div className="customSlide" key={props.index}>
+      <h3 onClick={()=>{handleClick('product', props.elem)}}>{props.elem.title}</h3>
+      <img src={props.elem.img} alt="CustomSlide" onClick={()=>{handleClick('product', props.elem)}}/>
     </div>
   )
 }

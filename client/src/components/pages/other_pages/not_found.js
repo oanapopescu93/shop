@@ -1,8 +1,8 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
+import { translate } from '../../translate'
 
 function Not_found(props) {
-  let lang = props.lang
   function handleBack(){
     window.location.href = "/"
   }    
@@ -10,8 +10,8 @@ function Not_found(props) {
     <div className="container_box not_found_container">
       <div className="not_found">
         <h1>404</h1>
-        {lang === "ro" ? <h2>Pagina nu exista</h2> : <h2>Page not found</h2>}  
-        <Button className="shop_button" type="button" onClick={handleBack}>{lang === "ro" ? <span>Inapoi</span> : <span>Back</span>}</Button>                              
+        <h2>{translate({lang: props.lang, info: "page_not_exists"})}</h2>
+        <Button className="shop_button" type="button" onClick={handleBack}>{translate({lang: props.lang, info: "back"})}</Button>                              
       </div>                         
     </div> 
 	)

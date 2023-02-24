@@ -2,14 +2,13 @@ import React from 'react'
 import Col from 'react-bootstrap/esm/Col'
 import Container from 'react-bootstrap/esm/Container'
 import Row from 'react-bootstrap/esm/Row'
+import { translate } from '../../translate'
 
-function Contact(props) {
-  let lang = props.lang  
-	 
+function Contact(props) {	 
   return <Container fluid className="contact">
     <Row>
       <Col sm={12}>
-        {lang === "ro" ? <h3>Contact</h3> : <h3>Contact</h3>}    
+        <h3>{translate({lang: props.lang, info: "contact"})}</h3>    
       </Col>
     </Row>
   </Container>

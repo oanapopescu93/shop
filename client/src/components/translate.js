@@ -1,5 +1,19 @@
 var words = {
     eng: {
+        //home
+        "about": "About",
+        "about_us": "About us",
+        "contact": "Contact",
+        "page_not_exists": "Page doesn't exist",
+        "back": "Back",
+        "read_more": "Read more",
+        "see_products": "See products",
+        "men": "Men",
+        "women": "Women",
+        "children": "Children",
+        "promo" : "Promo",
+        "category": "Categorie",
+
         //Cart
         "cart": "Cart",
         "cart_empty": "Cart is empty",
@@ -23,6 +37,8 @@ var words = {
         "county_state": "State",
         "postal_zip_code": "Zip/Postal",
         "payment_info": "Payment info",
+        "cash_on_delivery": "cash on delivery",
+        "pay_card": "pay with credit/debit card",
         "card_number": "Card number",
         "month": "Month",
         "year": "Year",  
@@ -44,6 +60,20 @@ var words = {
         "December": "December", 
     },
     ro: {
+        //home
+        "about": "Despre",
+        "about_us": "About noi",
+        "contact": "Contact",
+        "page_not_exists": "Pagina nu exista",
+        "back": "Inapoi",        
+        "read_more": "Citeste incontinuare",
+        "see_products": "Vezi produsele", 
+        "men": "Barbati",
+        "women": "Femei",
+        "children": "Copii",
+        "promo" : "Promo",      
+        "category": "Categorie",
+
         //Cart
         "cart": "Cos",
         "cart_empty": "Cosul este gol",
@@ -68,6 +98,8 @@ var words = {
         "county_state": "Judet",
         "postal_zip_code": "Cod Postal",
         "payment_info": "Plata",
+        "cash_on_delivery": "plata ramburs",
+        "pay_card": "card credit/debit",
         "card_number": "Numar card",
         "month": "Luna",
         "year": "An",

@@ -4,25 +4,6 @@ export const check_submit = function(input="", type){
       case "email":
         regex = '^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z]{2,4}$'
         //letters+numbers+"."+"_" + @ + letters+numbers+"."+"_" + letters(2-4 characters)
-           break
-      case "phone":
-        regex = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im'
-        //i makes the expression case-insensitive and m performs multi-line searches
-        // examples: 
-        // (123) 456-7890
-        // (123)456-7890
-        // 123-456-7890
-        // 123.456.7890
-        // 1234567890
-        // +31636363634
-        // 075-63546725
-      case "pass":
-        regex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
-        // At least one upper case English letter, (?=.*?[A-Z])
-        // At least one lower case English letter, (?=.*?[a-z])
-        // At least one digit, (?=.*?[0-9])
-        // At least one special character, (?=.*?[#?!@$%^&*-])
-        // Minimum eight in length .{8,}
         break
     }		
     let regex_exp = new RegExp(regex)			

@@ -6,6 +6,7 @@ import women from '../../../img/categories/women.png'
 import children from '../../../img/categories/children.jpg'
 import { useDispatch } from 'react-redux'
 import {page, filter} from '../../../actions/actions'
+import { translate } from '../../../translate'
 
 function Categories(props){
     let dispatch = useDispatch()	  
@@ -24,19 +25,19 @@ function Categories(props){
                     <Col sm={4}>
                         <div onClick={()=>{handleClick(men)}} className="category_box">
                             <img src={men} alt="category"/>
-                            {props.lang === "ro" ? <h4>Barbati</h4> : <h4>Men</h4>}
+                            <h4>{translate({lang: props.lang, info: "men"})}</h4>
                         </div>
                     </Col>
                     <Col sm={4}>
                         <div onClick={()=>{handleClick(women)}} className="category_box">
                             <img src={women} alt="category"/>
-                            {props.lang === "ro" ? <h4>Femei</h4> : <h4>Women</h4>}
+                            <h4>{translate({lang: props.lang, info: "women"})}</h4>
                         </div>
                     </Col>
                     <Col sm={4}>
                         <div onClick={()=>{handleClick(children)}} className="category_box">
                             <img src={children} alt="category"/>
-                            {props.lang === "ro" ? <h4>Copii</h4> : <h4>Children</h4>}
+                            <h4>{translate({lang: props.lang, info: "children"})}</h4>
                         </div>
                     </Col>
                 </Row>

@@ -5,6 +5,6 @@ module.exports = Object.freeze({
     AUTH_FROM: "oanapopescu93@gmail.com",
     CONTACT: {
         email: {link: "oanapopescu93@gmail.com"},
-        phone: {link: "+40711111111", text: "(+40)711.111.111"}
+        phone: {link: "+40712312312", text: "+40712312312"}
     }
 })

@@ -20,6 +20,7 @@ function Checkout(props) {
     const [checkedBillingAddress, setCheckedBillingAddress] = useState(true) 
     const [radioOne, setRadioOne] = useState(true) 
     const [radioTwo, setRadioTwo] = useState(false)
+    const [radioThree, setRadioThree] = useState(false)
 
     const countries_json = checkoutData().countries
     const countries = checkoutData().countries_list
@@ -62,7 +63,7 @@ function Checkout(props) {
             setLastnameError(true)
             problem = true
         }
-        if(!check_submit(data.phone, "phone")){
+        if(isEmpty(data.phone)){
             setPhoneError(true)
             problem = true
         }
@@ -86,22 +87,25 @@ function Checkout(props) {
             setPostalZipCodeError(true)
             problem = true
         }
-        if(!validateCard(data.card_number)){
-            setCardNumberError(true)
-            problem = true
-        }     
-        if(!validateCVV(data.card_number, data.cvv)){
-            setCvvError(true)
-            problem = true
+        if(!data.radio1){
+            if(!validateCard(data.card_number)){
+                setCardNumberError(true)
+                problem = true
+            }     
+            if(!validateCVV(data.card_number, data.cvv)){
+                setCvvError(true)
+                problem = true
+            }
+            if(isEmpty(month.text)){
+                setMonthError(true)
+                problem = true
+            }        
+            if(isEmpty(year)){
+                setYearError(true)
+                problem = true
+            }
         }
-        if(isEmpty(month.text)){
-            setMonthError(true)
-            problem = true
-        }        
-        if(isEmpty(year)){
-            setYearError(true)
-            problem = true
-        }
+        
         if(!data.billing_info_same){                
             if(isEmpty(data.address_billing)){
                 setAddressBillingError(true)
@@ -176,10 +180,21 @@ function Checkout(props) {
             case "billing_info_same":				
                 setCheckedBillingAddress(!checkedBillingAddress)
                 break
+                case "radio1":	
             case "radio1":	
+                setRadioOne(true)			
+                setRadioTwo(false)
+                setRadioThree(false)
+                break
             case "radio2":	
-                setRadioOne(!radioOne)			
-                setRadioTwo(!radioTwo)
+                setRadioOne(false)			
+                setRadioTwo(true)
+                setRadioThree(false)
+                break
+            case "radio3":	
+                setRadioOne(false)			
+                setRadioTwo(false)
+                setRadioThree(true)
                 break
         }  
     }
@@ -206,7 +221,7 @@ function Checkout(props) {
                         </Col>
                         <Col sm={3}>
                             <label htmlFor="phone">{translate({lang: props.lang, info: "phone"})}</label>
-                            <input type="text" className="form-control" placeholder="(+40)711.111.111" id="phone" name="phone"/>
+                            <input type="text" className="form-control" placeholder="+40712312312" id="phone" name="phone"/>
                             {phoneError ? <div id="form_error_phone" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
                         </Col>
                         <Col sm={3}>
@@ -267,57 +282,63 @@ function Checkout(props) {
                                 <div className="checkbox_radio_container">
                                         <label>
                                             <input type="radio" name="radio1" checked={radioOne} onChange={()=>{handleChangeCheck("radio1")}}/>
-                                            Test Gateway
+                                            {translate({lang: props.lang, info: "cash_on_delivery"})}
                                         </label>
                                         <label>
                                             <input type="radio" name="radio2" checked={radioTwo} onChange={()=>{handleChangeCheck("radio2")}}/>
-                                            Credit Card
+                                            {translate({lang: props.lang, info: "pay_card"})}
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="radio3" checked={radioThree} onChange={()=>{handleChangeCheck("radio3")}}/>
+                                            Test Gateway
                                         </label>
                                     </div>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col sm={12}>
-                                    <label htmlFor="card_number">{translate({lang: props.lang, info: "card_number"})}</label>
-                                    <input type="text" className="form-control" placeholder="XXXX XXXX XXXX XXXX" id="card_number" name="card_number"/>
-                                    {cardNumberError ? <div id="form_error_card_number" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm={4}>
-                                    <label>{translate({lang: props.lang, info: "month"})}</label>
-                                    <div className="dropdown">
-                                        <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span>{month.text ? <>{translate({lang: props.lang, info: month.text})}</> : <>{translate({lang: props.lang, info: "month"})}</>}</span>
-                                        </button>
-                                        <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
-                                            {monthOptions.map(function(x, i){
-                                                return <li key={i} onClick={()=>{changeMonth(x)}}><span>{x.text}</span></li>
-                                            })}
-                                        </ul>
-                                    </div>
-                                    {monthError ? <div id="form_error_month" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
-                                </Col>
-                                <Col sm={4}>
-                                    <label>{translate({lang: props.lang, info: "year"})}</label>
-                                    <div className="dropdown">
-                                        <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span>{year ? year : <>{translate({lang: props.lang, info: "year"})}</>}</span>
-                                        </button>
-                                        <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
-                                            {yearOptions.map(function(x, i){
-                                                return <li key={i} onClick={()=>{changeYear(x)}}><span>{x}</span></li>
-                                            })}
-                                        </ul>
-                                    </div>
-                                    {yearError ? <div id="form_error_year" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
-                                </Col>
-                                <Col sm={4}>
-                                    <label htmlFor="cvv">{translate({lang: props.lang, info: "cvv"})}</label>
-                                    <input type="text" className="form-control" placeholder="123" id="cvv" name="cvv"/>
-                                    {cvvError ? <div id="form_error_cvv" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
-                                </Col>
-                            </Row>
+                            {!radioOne ? <>
+                                <Row>
+                                    <Col sm={12}>
+                                        <label htmlFor="card_number">{translate({lang: props.lang, info: "card_number"})}</label>
+                                        <input type="text" className="form-control" placeholder="XXXX XXXX XXXX XXXX" id="card_number" name="card_number"/>
+                                        {cardNumberError ? <div id="form_error_card_number" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm={4}>
+                                        <label>{translate({lang: props.lang, info: "month"})}</label>
+                                        <div className="dropdown">
+                                            <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>{month.text ? <>{translate({lang: props.lang, info: month.text})}</> : <>{translate({lang: props.lang, info: "month"})}</>}</span>
+                                            </button>
+                                            <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
+                                                {monthOptions.map(function(x, i){
+                                                    return <li key={i} onClick={()=>{changeMonth(x)}}><span>{x.text}</span></li>
+                                                })}
+                                            </ul>
+                                        </div>
+                                        {monthError ? <div id="form_error_month" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
+                                    </Col>
+                                    <Col sm={4}>
+                                        <label>{translate({lang: props.lang, info: "year"})}</label>
+                                        <div className="dropdown">
+                                            <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span>{year ? year : <>{translate({lang: props.lang, info: "year"})}</>}</span>
+                                            </button>
+                                            <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
+                                                {yearOptions.map(function(x, i){
+                                                    return <li key={i} onClick={()=>{changeYear(x)}}><span>{x}</span></li>
+                                                })}
+                                            </ul>
+                                        </div>
+                                        {yearError ? <div id="form_error_year" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
+                                    </Col>
+                                    <Col sm={4}>
+                                        <label htmlFor="cvv">{translate({lang: props.lang, info: "cvv"})}</label>
+                                        <input type="text" className="form-control" placeholder="123" id="cvv" name="cvv"/>
+                                        {cvvError ? <div id="form_error_cvv" className="form_error">{translate({lang: props.lang, info: "fill_field"})}</div> : null}
+                                    </Col>
+                                </Row>
+                            </> : null}                            
                         </Col>
                     </Row>
                     <Row>
@@ -385,7 +406,9 @@ function Checkout(props) {
                 </form>
             </Col>
             <Col sm={4}>
-
+                <div>
+                    
+                </div>
             </Col>
         </Row> 
     </Container> 

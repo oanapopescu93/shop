@@ -10,6 +10,7 @@ import ProductAditionalInformation from './tabs/productTechnical'
 import ProductReviews from './tabs/productReviews'
 import {cartAdd, wishAdd} from '../../../actions/actions'
 import { useDispatch } from 'react-redux'
+import { translate } from '../../../translate'
 
 function ProductDetails(props){
 	let lang = props.lang
@@ -75,7 +76,7 @@ function ProductDetails(props){
 					<Stars stars={star_array}></Stars>
 					<div className="product_category_container">
 						<p>
-							{lang === "ro" ? <span>Categorie: </span> : <span>Category: </span>}
+							<span>{translate({lang: props.lang, info: "category"})}Categorie: </span>
 							{category ? <span className="tag product_type">{category}</span> : null}
 							{subcategory ? <span className="tag product_type">{subcategory}</span> : null}
 							{type ? <span className="tag product_type">{type}</span> : null}
