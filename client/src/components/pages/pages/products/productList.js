@@ -1,5 +1,5 @@
 import React from 'react'
-import { getStarArray } from '../../../utils'
+import {getStarArray } from '../../../utils'
 import Product from './product'
 
 function ProductList(props){

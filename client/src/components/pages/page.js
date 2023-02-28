@@ -93,7 +93,7 @@ function Page(props) {
             case "contact":
               return <Contact lang={lang}></Contact>
             case "products":
-              return <Products lang={lang} currency={currency} products={products} categories={categories} filter={filter}></Products>
+              return <Products lang={lang} currency={currency} products={products} categories={categories} filter={filter} sort={sort} search={search}></Products>
             case "home":
             default:
                 return <Homepage lang={lang} currency={currency} promo_list={promoProducts}></Homepage>

@@ -4,7 +4,6 @@ import { changePage } from '../../reducers/page'
 import { translate } from '../../translate'
 
 function Header(props){	
-  console.log(props)
   let dispatch = useDispatch()
   let cart = useSelector(state => state.cartWishlist.cart)
   let cart_qty = 0
