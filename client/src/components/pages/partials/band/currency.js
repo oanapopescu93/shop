@@ -1,11 +1,15 @@
 import React, {useState} from 'react'
-import { getCookie } from '../../../utils'
+import { changeCurrency } from '../../../reducers/settings'
+import { useDispatch } from 'react-redux'
+import { getCookie, setCookie } from '../../../utils'
 
 function Currency(props){	
-	const [currency, setCurrency] = useState(getCookie("shop_currency") === '' ? 'EUR' : getCookie("shop_currency"))
+	const [currency, setCurrency] = useState(getCookie("shop_currency") === '' ? 'EUR' : getCookie("shop_currency").toUpperCase())
+	let dispatch = useDispatch()
 
 	function handleClick(choice){
 		setCurrency(choice.toUpperCase())
+		dispatch(changeCurrency(choice))
     }
 
 	return (

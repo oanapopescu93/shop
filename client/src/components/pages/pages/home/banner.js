@@ -2,14 +2,14 @@ import React from 'react'
 import Button from 'react-bootstrap/esm/Button'
 import Row from 'react-bootstrap/esm/Row'
 import { useDispatch } from 'react-redux'
-import {page} from '../../../actions/actions'
+import { changePage } from '../../../reducers/page'
 import { translate } from '../../../translate'
 
 function BannerText(props){
     let dispatch = useDispatch()	  
 
     function handleClick(){
-        dispatch(page({name: 'products'}))
+        dispatch(changePage({name: 'products'}))
     }
 
 	return <div className={"banner_text " + props.template}>

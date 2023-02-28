@@ -5,6 +5,14 @@ export const check_submit = function(input="", type){
         regex = '^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z]{2,4}$'
         //letters+numbers+"."+"_" + @ + letters+numbers+"."+"_" + letters(2-4 characters)
         break
+      case "pass":				
+				regex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
+				// At least one upper case English letter, (?=.*?[A-Z])
+				// At least one lower case English letter, (?=.*?[a-z])
+				// At least one digit, (?=.*?[0-9])
+				// At least one special character, (?=.*?[#?!@$%^&*-])
+				// Minimum eight in length .{8,}
+				break
     }		
     let regex_exp = new RegExp(regex)			
     let pass_result = regex_exp.test(input)
@@ -29,7 +37,7 @@ export const validateCard = function(val) {
       shouldDouble = !shouldDouble
     }
     
-    let valid = (sum % 10) == 0
+    let valid = (sum % 10) === 0
     let accepted = false
     
     // loop through the keys (visa, mastercard, amex, etc.)

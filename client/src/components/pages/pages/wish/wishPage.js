@@ -3,28 +3,16 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import List from '../../partials/list'
+import { translate } from '../../../translate'
 
 function WishPage(props){
-    let lang = props.lang
-    let wishlist = props.wishlist
-
     return <Container fluid className="wish_container">
-          {lang === "ro" ? <h3>Lista de dorinte</h3> : <h3>Wishlist</h3>}     
-          {(() => { 
-            if(wishlist && wishlist.length>0){
-              return <Row>
-                  <Col sm={8}>
-                    <List template="wishlist" lang={lang} list={wishlist}></List>
-                  </Col>
-                </Row>
-            } else {
-              if(lang === "ro"){
-                return <p>Lista este gol</p>
-              } else {
-                return <p>The list is empty</p>
-              }
-            }
-          })()}
+          <h3>{translate({lang: props.lang, info: "wishlist"})}</h3>
+          {props.wishlist && props.wishlist.length>0 ? <Row>
+            <Col sm={8}>
+              <List template="wishlist" lang={props.lang} list={props.wishlist}></List>
+            </Col>
+          </Row> : <p>{translate({lang: props.lang, info: "wishlist_empty"})}</p>}
     </Container>
 }
 

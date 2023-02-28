@@ -1,49 +1,46 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
-import { filterAdd, filterRemove } from '../../../actions/actions'
+import { translate } from '../../../translate'
 import { getStarArray } from '../../../utils'
 import Stars from '../../partials/stars'
 
 function Panel(props){
-    let lang = props.lang
     let dispatch = useDispatch()
 
     function handleClick(e, filter){
       let elem = e.target.closest('li')
       if(elem.classList.contains("checked")){
         elem.classList.remove("checked")
-        dispatch(filterRemove(filter))
       } else {
-        elem.classList.add("checked");
-        dispatch(filterAdd(filter))
+        elem.classList.add("checked")
       }
     }
 
     return (
       <div className="panel">
         <div className="panel_box panel_category">
-          {lang === "ro" ? <h4>Categorie</h4> : <h4>Category</h4>}
+          <h4>{translate({lang: props.lang, info: "category"})}</h4>
           <ul>
-            <li onClick={(e)=>{handleClick(e, {'category': 'men'} )}}>{lang === "ro" ? <span className="panel_category">Barbati</span> : <span className="panel_category">Men</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'category': 'women'} )}}>{lang === "ro" ? <span className="panel_category">Women</span> : <span className="panel_category">Women</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'category': 'children'} )}}>{lang === "ro" ? <span className="panel_category">Children</span> : <span className="panel_category">Children</span>}</li>
+            <li onClick={(e)=>{handleClick(e, {'category': 'men'} )}}><span className="panel_category">{translate({lang: props.lang, info: "men"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'category': 'women'} )}}><span className="panel_category">{translate({lang: props.lang, info: "women"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'category': 'children'} )}}><span className="panel_category">{translate({lang: props.lang, info: "children"})}</span></li>
           </ul>
         </div>
         <div className="panel_box panel_type">
-          {lang === "ro" ? <h4>Tip</h4> : <h4>Type</h4>}
+          <h4>{translate({lang: props.lang, info: "type"})}</h4>
           <ul>
-            <li onClick={(e)=>{handleClick(e, {'type': 'shirts'} )}}>{lang === "ro" ? <span className="panel_type">Shirts</span> : <span className="panel_type">Shirts</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'type': 'pants'} )}}>{lang === "ro" ? <span className="panel_type">Pants</span> : <span className="panel_type">Pants</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'type': 'skirts'} )}}>{lang === "ro" ? <span className="panel_type">Skirts</span> : <span className="panel_type">Skirts</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'type': 'coats'} )}}>{lang === "ro" ? <span className="panel_type">Coats</span> : <span className="panel_type">Coats</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'type': 'sport_shoes'} )}}>{lang === "ro" ? <span className="panel_type">Sport shoes</span> : <span className="panel_type">Sport shoes</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'type': 'boots'} )}}>{lang === "ro" ? <span className="panel_type">Boots</span> : <span className="panel_type">Boots</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'type': 'sandals'} )}}>{lang === "ro" ? <span className="panel_type">Sandals</span> : <span className="panel_type">Sandals</span>}</li>
-            <li onClick={(e)=>{handleClick(e, {'type': 'accesories'} )}}>{lang === "ro" ? <span className="panel_type">Accesories</span> : <span className="panel_type">Accesories</span>}</li>
+            <li onClick={(e)=>{handleClick(e, {'type': 'shirts'} )}}><span className="panel_type">{translate({lang: props.lang, info: "shirts"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'type': 'pants'} )}}><span className="panel_type">{translate({lang: props.lang, info: "pants"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'type': 'skirts'} )}}><span className="panel_type">{translate({lang: props.lang, info: "skirts"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'type': 'coats'} )}}><span className="panel_type">{translate({lang: props.lang, info: "coats"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'type': 'sport shoes'} )}}><span className="panel_type">{translate({lang: props.lang, info: "sport_shoes"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'type': 'boots'} )}}><span className="panel_type">{translate({lang: props.lang, info: "boots"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'type': 'sandals'} )}}><span className="panel_type">{translate({lang: props.lang, info: "sandals"})}</span></li>
+            <li onClick={(e)=>{handleClick(e, {'type': 'accesories'} )}}><span className="panel_type">{translate({lang: props.lang, info: "accesories"})}</span></li>
           </ul>
         </div>
         <div className="panel_box panel_size">
-          {lang === "ro" ? <h4>Marime</h4> : <h4>Size</h4>}
+          <h4>{translate({lang: props.lang, info: "size"})}</h4>
           <ul>
             <li onClick={(e)=>{handleClick(e, {'size': 'XS'} )}}><span className="panel_dot_size">XS</span></li>
             <li onClick={(e)=>{handleClick(e, {'size': 'S'} )}}><span className="panel_dot_size">S</span></li>
@@ -55,7 +52,7 @@ function Panel(props){
           </ul>
         </div>
         <div className="panel_box panel_color">
-          {lang === "ro" ? <h4>Culoare</h4> : <h4>Color</h4>}
+          <h4>{translate({lang: props.lang, info: "color"})}</h4>
           <ul>
             <li onClick={(e)=>{handleClick(e, {'color': 'red'} )}}><span className="panel_dot_color red"></span></li>
             <li onClick={(e)=>{handleClick(e, {'color': 'orange'} )}}><span className="panel_dot_color orange"></span></li>
@@ -71,7 +68,7 @@ function Panel(props){
           </ul>
         </div>
         <div className="panel_box panel_reviews">
-          {lang === "ro" ? <h4>Rating</h4> : <h4>Rating</h4>}
+          <h4>{translate({lang: props.lang, info: "rating"})}</h4>
           <ul>
             <li onClick={(e)=>{handleClick(e, {'stars': 5} )}}><Stars stars={getStarArray(5)}></Stars></li>
             <li onClick={(e)=>{handleClick(e, {'stars': 4} )}}><Stars stars={getStarArray(4)}></Stars></li>

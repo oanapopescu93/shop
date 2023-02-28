@@ -13,6 +13,40 @@ var words = {
         "children": "Children",
         "promo" : "Promo",
         "category": "Categorie",
+        "type": "Type",
+        "search": "Search",
+
+        //list
+        "product_code": "Product code",
+        "qty": "Qty",
+        "size": "Size",
+        "color": "Color",
+        "remove_all": "Remove all",
+        "continue_shopping": "Continue shopping",
+        "ratings": "Rating", 
+        "shirts": "Shirts",
+        "pants": "Pants",
+        "skirts": "Skirts",
+        "coats": "Coats",
+        "sport_shoes": "Sport shoes",
+        "boots": "Boots",
+        "sandals": "Sandals",
+        "accesories": "Accesories",
+        "clothes": "Clothes",
+        "shoes": "Shoes",
+        "sort": "Sort",
+        "price_asc": "Price (ascendent)",
+        "price_desc": "Price (descendent)",
+        "no_products": "Nu exista produse",
+
+        //product
+        "add_to_cart": "Add to cart",
+        "add_to_wishlist": "Add to wishlist",
+        "description": "Description",
+        "reviews": "Reviews",
+        "no_reviews": "No reviews",
+        "aditional_information": "Aditional information",
+        "no_information": "No information",        
 
         //Cart
         "cart": "Cart",
@@ -24,6 +58,10 @@ var words = {
         "total": "Total",
         "checkout": "Checkout",
         "apply_coupon": "Apply coupon",
+
+        //wishlist
+        "wishlist": "Wishlist",
+        "wishlist_empty": "Wishlist is empty",
 
         //checkout"
         "fill_field": "Please fill out this field",
@@ -58,6 +96,10 @@ var words = {
         "October": "October", 
         "November": "November", 
         "December": "December", 
+
+        //sign
+        "sign_in": "Sign in",
+        "sign_up": "Sign up",
     },
     ro: {
         //home
@@ -73,6 +115,40 @@ var words = {
         "children": "Copii",
         "promo" : "Promo",      
         "category": "Categorie",
+        "type": "Tip",
+        "search": "Cauta",
+
+        //list
+        "product_code": "Cod produs",
+        "qty": "Cant",
+        "size": "Marime",
+        "color": "Culoare",
+        "remove_all": "Sterge cos",
+        "continue_shopping": "Continua cumparaturile",
+        "ratings": "Rating", 
+        "shirts": "Camasi",
+        "pants": "Pantaloni",
+        "skirts": "Fuste",
+        "coats": "Haine",
+        "sport_shoes": "Pantofi sport",
+        "boots": "Ghete/Cizme",
+        "sandals": "Sandale",
+        "accesories": "Accesorii",
+        "clothes": "Haine",
+        "shoes": "Incaltaminte",
+        "sort": "Sorteaza",
+        "price_asc": "Pret (ascendent)",
+        "price_desc": "Pret (descendent)",
+        "no_products": "Nu exista produse",
+
+        //product
+        "add_to_cart": "Adauga in cos",
+        "add_to_wishlist": "Adauga in wishlist",
+        "description": "Descriere",
+        "reviews": "Review-uri",
+        "no_reviews": "Nu exista review-uri",
+        "aditional_information": "Informatii aditionale",
+        "no_information": "Fara informatii",
 
         //Cart
         "cart": "Cos",
@@ -84,6 +160,10 @@ var words = {
         "total": "Total",
         "checkout": "Finalizeaza comanda",
         "apply_coupon": "Aplica cupon",
+
+        //wishlist
+        "wishlist": "Wishlist",
+        "wishlist_empty": "Wishlist este gol",
 
         //checkout
         "customer_info": "Date client",
@@ -119,6 +199,10 @@ var words = {
         "October": "Octombrie", 
         "November": "Noiembrie", 
         "December": "Decembrie", 
+
+        //sign
+        "sign_in": "Logare",
+        "sign_up": "Inscriere",
     }
 }
 

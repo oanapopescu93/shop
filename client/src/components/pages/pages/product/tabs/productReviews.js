@@ -1,10 +1,11 @@
 import React from 'react'
+import { translate } from '../../../../translate'
 
 function ProductReviews(props){
 	return <div className="product_tab">
 		<div className="product_tab_box">
-			{props.lang === "ro" ? <h4>Review-uri</h4> : <h4>Reviews</h4>}
-			{props.lang === "ro" ? <p>Nu exista review-uri</p> : <p>No reviews</p>}
+			<h4>{translate({lang: props.lang, info: "reviews"})}</h4>
+			<p>{translate({lang: props.lang, info: "no_reviews"})}</p>
 		</div>
 	</div>
 }

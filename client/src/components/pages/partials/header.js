@@ -1,18 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { page } from '../../actions/actions'
+import { changePage } from '../../reducers/page'
 import { translate } from '../../translate'
 
 function Header(props){	
+  console.log(props)
   let dispatch = useDispatch()
-  let cart = useSelector(state => state.cart)
+  let cart = useSelector(state => state.cartWishlist.cart)
   let cart_qty = 0
   for(let i in cart){
     cart_qty = cart_qty + cart[i].qty
   }
 
   function handleClick(x){
-    dispatch(page({name: x}))
+    dispatch(changePage({name: x}))
   }
 
 	return (

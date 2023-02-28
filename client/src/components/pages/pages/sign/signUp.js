@@ -1,12 +1,10 @@
 import React from 'react'
+import { translate } from '../../../translate'
 
 function SignUp(props){
-	let lang = props.lang
-	let socket = props.socket
-
 	return (
-		<div className="sign_in_container">
-			<p>Sign Up</p>
+		<div className="sign_up_container">
+			<h3>{translate({lang: props.lang, info: "sign_up"})}</h3>
 		</div>
 	)
 }

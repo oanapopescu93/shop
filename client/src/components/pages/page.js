@@ -20,14 +20,23 @@ import WishPage from './pages/wish/wishPage'
 
 function Page(props) {
   let page = useSelector(state => state.page)
-  let cart = useSelector(state => state.cart)
+  let lang = useSelector(state => state.settings.lang)
+  let currency = useSelector(state => state.settings.currency)
+  let cart = useSelector(state => state.cartWishlist.cart)
   let filter = useSelector(state => state.filter)
-  let sort = useSelector(state => state.sort)
-  let search = useSelector(state => state.search)
-  let wishlist = useSelector(state => state.wish)
+  let sort = useSelector(state => state.sort.sort)
+  let search = useSelector(state => state.search.search)
+  let wishlist = useSelector(state => state.cartWishlist.wishlist)
+
+  let home = props.home
+  let categories = home.categories
+  let contact = home.contact
+  let shipping = home.shipping
+  let productImages = props.productImages
 
   const [cookies, setCookies] = useState(getCookie("shop_cookies") === '' ? false : true)
   const [products, setProducts] = useState([])
+  const [promoProducts, setPromoProducts] = useState([])
 
   function shop_cookies(){
 		setCookie("shop_cookies", true)
@@ -35,87 +44,66 @@ function Page(props) {
 	}
 
   useEffect(() => {
-    if(search !== ''){      
-      productsFromSearch(props.products)
-    } else {
-      productsFromFilter(props.products)
-    }
-	}, [page, filter, sort, search])
-
-  function productsFromSearch(products){
-    let array = products.filter(item => {
+    //add images to products
+    let t = 0
+    let array = home.products.map(function(item){
       let myItem = { ...item }
-      if (myItem.title.toLowerCase().includes(search.toLowerCase())) {
-        return myItem
+      t++
+      if(!productImages[t]){
+        t = 0
       }
-    })
-
+      myItem.img = productImages[t].img
+      return myItem
+    })    
     setProducts(array)
-  }
 
-  function productsFromFilter(products){
-    let array = []
-    let keys = Object.keys(filter)
-    for(let i in keys){
-      let attr = keys[i]
-      let values = filter[keys[i]]   
-      
-      if(values && values.length>0){        
-        array = products.filter(item => {
-          let myItem = { ...item }
-          if(values.includes(myItem[attr])){
-            return myItem
-          }          
-        })
-      } 
-    }
-    
-    if(sort){
-      let attr = Object.keys(sort)[0]
-      let asc = true
-      if(sort[attr] === "desc"){
-        asc = false
+    //create product list that needs to be promoted
+    let arrayPromo = []
+    for(let i in array){
+      for(let j in home.promo_products){
+        if(array[i].id === home.promo_products[j]){
+          arrayPromo.push(array[i])
+        }
       }
-      array = sortList(array, attr, asc)
     }
-    
-    setProducts(array)
-  }
+    setPromoProducts(arrayPromo)
+	}, [])
 
 	return (
     <>
-      <Band lang={props.lang} contact={props.contact}></Band>
-      <Header lang={props.lang}></Header>
-      <Navbar lang={props.lang} category={props.categories}></Navbar>
+      <Band lang={lang} contact={contact}></Band>
+      <Header lang={lang}></Header>
+      <Navbar lang={lang} category={categories}></Navbar>
       {(() => { 
         if(page){
+          // return <Sign lang={lang} currency={currency} socket={props.socket}></Sign> 
           switch (page.name) {
             case "sign":
-              return <Sign lang={props.lang} socket={props.socket}></Sign> 
+              return <Sign lang={lang} socket={props.socket}></Sign> 
             case "product":
-              return <ProductPage lang={props.lang} socket={props.socket} products={props.products} product={page.details}></ProductPage>
+              return <ProductPage lang={lang} currency={currency} socket={props.socket} products={props.products} product={page.details}></ProductPage>
             case "cart":
-              return <CartPage cart={cart} lang={props.lang} socket={props.socket} shipping={props.shipping}></CartPage>
+              return <CartPage cart={cart} lang={lang} currency={currency} socket={props.socket} shipping={shipping}></CartPage>
             case "wish":
-              return <WishPage wishlist={wishlist} lang={props.lang}></WishPage>
+              return <WishPage wishlist={wishlist} lang={lang} currency={currency}></WishPage>
             case "checkout":
-              return <Checkout cart={cart} lang={props.lang} socket={props.socket} shipping={props.shipping}></Checkout>
+              return <Checkout cart={cart} lang={lang} currency={currency} socket={props.socket} shipping={shipping}></Checkout>
             case "about":
-              return <About lang={props.lang}></About>
+              return <About lang={lang}></About>
             case "contact":
-              return <Contact lang={props.lang}></Contact>
+              return <Contact lang={lang}></Contact>
             case "products":
-              return <Products lang={props.lang} products={products} categories={props.categories} filter={filter}></Products>
+              return <Products lang={lang} currency={currency} products={products} categories={categories} filter={filter}></Products>
             case "home":
             default:
-                return <Homepage lang={props.lang} promo_list={props.promo_list}></Homepage>
+                return <Homepage lang={lang} currency={currency} promo_list={promoProducts}></Homepage>
           }
         } else {
-          return <Homepage lang={props.lang}></Homepage>
+          return <Homepage lang={lang} currency={currency}></Homepage>
         }
       })()}      
-      <Footer lang={props.lang}></Footer>
-      {!cookies ? <Cookies shop_cookies={shop_cookies} lang={props.lang}></Cookies>  : null}
+      <Footer lang={lang} currency={currency}></Footer>
+      {!cookies ? <Cookies shop_cookies={shop_cookies} lang={lang} currency={currency}></Cookies>  : null}
     </>
 	)
 }

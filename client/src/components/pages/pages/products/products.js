@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Panel from './panel'
 import Sort from './sort'
 import ProductList from './productList'
+import { translate } from '../../../translate'
 
 function Products(props) {
 	return <Container fluid className="container_box products_container">						
@@ -20,8 +21,8 @@ function Products(props) {
               </Col>
             </Row>
             <Row>
-              {props.products && props.products.length>0 ? <ProductList lang={props.lang} products={props.products}></ProductList> : <Col sm={12}>
-                <p>{props.lang == "ro" ? <span>Nu exista produse</span> : <span>No products</span>}</p>  
+              {props.products && props.products.length>0 ? <ProductList lang={props.lang} products={props.products}></ProductList> : <Col sm={12}>                
+                <p>{translate({lang: props.lang, info: "no_products"})}</p>
               </Col>}
             </Row>
           </div>

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import Button from 'react-bootstrap/Button'
-import {page} from '../../../actions/actions'
 import { translate } from '../../../translate'
+import { changePage } from '../../../reducers/page'
 
 function Panel(props) {
     let dispatch = useDispatch()
@@ -10,7 +10,6 @@ function Panel(props) {
     const [shippingValue, setShippingValue] = useState(props.shipping[0])    
     const [total, setTotal] = useState(0)
     let shipping = props.shipping ? props.shipping : []
-    console.log(props.promo)
 
     useEffect(() => {
 		let cart = props.cart 
@@ -23,7 +22,7 @@ function Panel(props) {
 	}, [props.cart])
 
     function handleClick(){
-        dispatch(page({name: 'checkout'}))
+        dispatch(changePage({name: 'checkout'}))
     }
 
     function change(x){

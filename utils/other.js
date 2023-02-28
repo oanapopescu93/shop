@@ -36,7 +36,7 @@ function sort_array_obj(array, sort_by){
 function get_user_from_uuid(uuid, users_array){
 	let user_found
 	for(let i in users_array){
-		if(users_array[i].uuid == uuid){
+		if(users_array[i].uuid === uuid){
 			user_found = users_array[i]									
 			break
 		}

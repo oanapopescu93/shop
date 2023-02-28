@@ -24,13 +24,7 @@ export const setCookie = function (cname, cvalue, hours=12){
   let d = new Date()
   d.setTime(d.getTime() + (hours * 60 * 60 * 1000))
   let expires = "expires=" + d.toGMTString()
-  if(getCookie("shop_cookies") === "true"){
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
-  } else {
-    if(cname === "shop_uuid" || cname === "shop_cookies"){
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
-    }
-  }
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
 }
 export const getCookie = function (cname){
   let name = cname + "="

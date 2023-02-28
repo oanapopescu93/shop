@@ -1,9 +1,21 @@
-const sortReducer = (state = null, action) => {	
-	switch(action.type){        
-		case "sort":
-			return action.info
-		default: 
-			return state
-	}
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+    sort: null
 }
-export default sortReducer
+
+const sortSlice = createSlice({
+    name: 'sort',
+    initialState,
+    reducers: {
+        changeSort: (state, { payload }) => {
+            state.sort = payload
+        },
+    }
+})
+
+export const {
+    changeSort,
+} = sortSlice.actions
+
+export default sortSlice.reducer

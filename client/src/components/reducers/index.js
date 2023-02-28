@@ -1,23 +1,23 @@
 import {combineReducers} from 'redux'
 
-import languageReducer from './language'
-import currencyReducer from './currency'
+import settingsReducer from './settings'
 import filterReducer from './filter'
 import pageReducer from './page'
-import cartReducer from './cart'
+import cartWishlistReducer from './cartWishlist'
 import sortReducer from './sort'
 import searchReducer from './search'
-import wishReducer from './wishlist'
+// import raduReducer from './radu'
+import homeReducer from './home'
 
 const allReducers = combineReducers({	
-	language: languageReducer,
-	currency: currencyReducer,
+	settings: settingsReducer,
 	filter: filterReducer,
 	page: pageReducer,
-	cart: cartReducer,
-	wish: wishReducer,
+	cartWishlist: cartWishlistReducer,
 	sort: sortReducer,
 	search: searchReducer,
+	// radu: raduReducer,
+	home: homeReducer,
 })
 
 export default allReducers

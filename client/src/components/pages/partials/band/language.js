@@ -1,16 +1,15 @@
 import React, {useState} from 'react'
-import { getCookie } from '../../../utils'
+import { getCookie, setCookie } from '../../../utils'
 import { useDispatch } from 'react-redux'
-import { language } from '../../../actions/actions'
+import { changeLanguage } from '../../../reducers/settings'
 
 function Language(props){	
-	const [lang, setlang] = useState(getCookie("shop_language") === '' ? 'ENG' : getCookie("shop_language"))
+	const [lang, setlang] = useState(getCookie("shop_language") === '' ? 'ENG' : getCookie("shop_language").toUpperCase())
 	let dispatch = useDispatch()
 
 	function handleClick(choice){
-		let x = choice
-		setlang(x.toLowerCase())
-		dispatch(language(x))
+		setlang(choice.toUpperCase())
+		dispatch(changeLanguage(choice))
     }
 
 	return (

@@ -1,9 +1,10 @@
 import React from 'react'
+import { translate } from '../../../../translate'
 
 function ProductAditionalInformation(props){
 	return <div className="product_tab">
-		{props.lang === "ro" ? <h4>Informatii aditionale</h4> : <h4>Aditional information</h4>}
-		{props.lang === "ro" ? <p>Fara informatii</p> : <p>No information</p>}
+		<h4>{translate({lang: props.lang, info: "aditional_information"})}</h4>
+		<p>{translate({lang: props.lang, info: "no_information"})}</p>
 	</div>
 }
 

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {useSelector} from 'react-redux'
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import {Route, Switch, BrowserRouter} from 'react-router-dom'
 
 import './css/font_roboto.css'
@@ -7,11 +7,12 @@ import 'font-awesome/css/font-awesome.min.css'
 import './css/style.css'
 
 import Page from './pages/page'
-import NotFound from './pages/other_pages/not_found'
+// import NotFound from './pages/other_pages/not_found'
 import Loader from './pages/partials/loader'
 
 import socketIOClient from "socket.io-client/dist/socket.io"
 import { getProductImages } from './utils'
+import { bringPayload, bringProducts, showProducts } from './reducers/home'
 
 const socket = socketIOClient("/")
 
@@ -19,7 +20,7 @@ let my_console = function(){
     let oldConsole = null
     let me = {}
     me.enable =  function enable(){
-		if(oldConsole == null) return;
+		if(oldConsole === null) return;
 		window['console']['log'] = oldConsole
 		window['console']['warn'] = oldConsole
 		window['console']['error'] = oldConsole
@@ -35,57 +36,23 @@ let my_console = function(){
 
 function App(props){	
 	//my_console.disable()
-
-	const [loading, setLoading] = useState(true)
-	const [data, setData] = useState(null)	
-	const [dataPromo, setDataPromo] = useState(null)	
-	const [contact, setContact] = useState(null)	
-	const [shipping, setShipping] = useState(null)	
-	let lang = useSelector(state => state.language)
 	let productImages = getProductImages()
-  	const [categories, setCategories] = useState(null)	
+	let dispatch = useDispatch()
+	let home = useSelector(state => state.home)
 
   	useEffect(() => {
-		let payload = null
-		socket.emit('homepage_send', payload)
-		socket.on('homepage_read', function(res){
-			if(res){
-				let array = res.products
-				let array_promo = []
-				for(let i in array){
-					for(let j in productImages){
-						if(array[i].id === productImages[j].id){
-							array[i].img = productImages[j].img
-						}
-					}
-				}
-				setData(array)
-				for(let i in array){
-					if(res.promo_products.includes(array[i].id)){
-						array_promo.push(array[i])
-					}
-				}
-				setDataPromo(array_promo)
-				setContact(res.contact)
-        		setCategories(res.categories[0])
-				setShipping(res.shipping)
-        		setLoading(false) 
-			}
-		})
+		dispatch(bringPayload())		
 		setInterval(function () {		  
 			socket.emit('heartbeat', { data: "ping" })
 		}, 15000)
 	}, [])	
 
 	return <>
-      {loading ? <Loader></Loader> : 
+      {home.products && home.products.length==0 ? <Loader></Loader> : 
         <BrowserRouter>
           <Switch>
             <Route exact path="/">
-            <Page lang={lang} socket={socket} products={data} promo_list={dataPromo} categories={categories} contact={contact} shipping={shipping}></Page>
-          </Route>
-          <Route path="*">
-            <NotFound lang={lang}></NotFound>
+            <Page socket={socket} home={home} productImages={productImages}></Page>
           </Route>
           </Switch>			
         </BrowserRouter>

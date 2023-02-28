@@ -5,8 +5,8 @@ import men from '../../../img/categories/men.jpg'
 import women from '../../../img/categories/women.png'
 import children from '../../../img/categories/children.jpg'
 import { useDispatch } from 'react-redux'
-import {page, filter} from '../../../actions/actions'
 import { translate } from '../../../translate'
+import { changePage } from '../../../reducers/page'
 
 function Categories(props){
     let dispatch = useDispatch()	  
@@ -14,8 +14,8 @@ function Categories(props){
     function handleClick(category){
         let subcategory = null
         let type = null
-        dispatch(page({name: 'products'}))
-        dispatch(filter({category, subcategory, type}))
+        dispatch(changePage({name: 'products'}))
+        //dispatch(filter({category, subcategory, type}))
     }
 
 	return (
