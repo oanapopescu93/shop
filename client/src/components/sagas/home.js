@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { bringPayload, showPayload } from "../reducers/home";
 
 function request(){
@@ -9,7 +9,7 @@ function request(){
 
 function api(){
     return new Promise(function(resolve, reject){
-        fetch('/api/products')
+        fetch('/api/home')
         .then((response) => response.json())
         .then((data) => resolve(data))
         .catch(err => console.error('fetchBringThemAll2--> ' + err));

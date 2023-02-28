@@ -7,7 +7,7 @@ var shipping = require('./var/products').SHIPPING
 var promo_products = require('./var/products').PROMO_PRODUCTS
 var coupons = require('./var/products').COUPONS
 
-router.get('/api/products', function(req, res, next){
+router.get('/api/home', function(req, res, next){
 	let discount = false
 	if(coupons && coupons.length>0){
 		discount = true
