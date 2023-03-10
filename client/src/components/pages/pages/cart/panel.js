@@ -34,16 +34,16 @@ function Panel(props) {
         <h4>{translate({lang: props.lang, info: "order_summary"})}</h4>
         <p><span>{translate({lang: props.lang, info: "subtotal"})}: </span><span>{subtotal}</span></p>
         <p>{translate({lang: props.lang, info: "shipping"})}</p>
-            <div className="dropdown">
-                <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>{shippingValue.name} ({shippingValue.price})</span>
-                </button>
-                <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
-                    {shipping.map(function(x, i){
-                        return <li key={i} onClick={()=>{change(x)}}><span>{x.name} ({x.price})</span></li>
-                    })}
-                </ul>
-            </div>
+        <div className="dropdown">
+            <button className="dropdown-toggle color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>{shippingValue.name} ({shippingValue.price})</span>
+            </button>
+            <ul className="dropdown-menu color" aria-labelledby="dropdownMenuButton">                
+                {shipping.map(function(x, i){
+                    return <li key={i} onClick={()=>{change(x)}}><span>{x.name} ({x.price})</span></li>
+                })}
+            </ul>
+        </div>
         <p>{translate({lang: props.lang, info: "promo_code"})}</p>
         <h4><span>{translate({lang: props.lang, info: "total"})}: </span><span>{total}</span></h4>
         <Button className="shop_button" type="button" onClick={handleClick}><span>{translate({lang: props.lang, info: "checkout"})}</span></Button>     

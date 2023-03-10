@@ -633,14 +633,23 @@ img{
 	color: var(--color_dark);
 }
 
-.sort{
+/* SORT and PAGING */
+.productsPanelContainer{
+	padding: var(--padding_box_5);
+}
+.productsPanel{
 	border: solid 1px var(--bg_dark);
 	background-color: var(--bg_dark);
 	border-radius: var(--border_radius_5);
 	padding: var(--padding_box_5);
 	margin-bottom: 10px;
 }
-.sort .dropdown-toggle{
+.sort, .pages{
+	display: inline-block;
+	vertical-align: top;
+	margin-right: var(--padding_box_5);
+}
+.sort .dropdown-toggle, .pages .dropdown-toggle{
 	border: solid 1px var(--bg);
 	background-color: var(--bg);
 	border-radius: var(--border_radius_10);
@@ -648,15 +657,16 @@ img{
 	font-size: 12px;
 	line-height: 12px;
 	padding: var(--padding_box_5);
+	width: 60px;
 }
-.sort .dropdown-menu{
+.sort .dropdown-menu, .pages .dropdown-menu{
 	border: solid 1px var(--bg);
 	background-color: var(--bg);
 	border-radius: var(--border_radius_5);
 	color: var(--text);
 	border: solid 1px var(--bg_dark);
 }
-.sort .dropdown-menu li{
+.sort .dropdown-menu li, .pages .dropdown-menu li{
 	font-size: 12px;
 	line-height: 12px;
 	padding: var(--padding_box_5);
@@ -935,6 +945,32 @@ img{
 .list_action_remove_all .shop_button span, .list_action_remove_all .shop_button span{
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.paginationContainer{
+	width: 100%;
+	text-align: center;
+}
+.paginationNumbers{
+	padding: 5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.paginationButton{
+	padding: 5px;
+	display: inline-block;
+	vertical-align: middle;
+	border:solid 1px var(--button_color_bg);
+	color: var(--button_color_bg);
+	border-radius: 100%;
+	background-color: var(--bg);
+	width: 25px;
+    height: 25px;
+    line-height: 10px;
+}
+.paginationButton.active{
+	color: var(--bg);
+	background-color: var(--button_color_bg);
 }
 
 /* CHECKOUT */

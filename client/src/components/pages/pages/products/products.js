@@ -7,10 +7,12 @@ import Sort from './sort'
 import ProductList from './productList'
 import { translate } from '../../../translate'
 import {sortList} from '../../../utils'
+import Pages from './pages'
 
 function Products(props) {
   const {filter, sort, search} = props
   const [products, setProducts] = useState([])
+  const [chunkSize, setChunkSize] = useState(12)
   let array = [...props.products]
 
   useEffect(() => {
@@ -53,12 +55,15 @@ function Products(props) {
         <Col lg={10} md={9} sm={9}>
           <div className="body_container">
             <Row>
-              <Col sm={12}>
-                <Sort lang={props.lang}></Sort>
+              <Col sm={12} className="productsPanelContainer">
+                <div className="productsPanel">
+                  <Sort lang={props.lang}></Sort>
+                  <Pages></Pages>
+                </div>
               </Col>
             </Row>
             <Row>
-              {products && products.length>0 ? <ProductList lang={props.lang} products={products}></ProductList> : <Col sm={12}>                
+              {products && products.length>0 ? <ProductList lang={props.lang} products={products} chunkSize={chunkSize}></ProductList> : <Col sm={12}>                
                 <p>{translate({lang: props.lang, info: "no_products"})}</p>
               </Col>}
             </Row>

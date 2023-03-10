@@ -11,7 +11,6 @@ function Sort(props){
     }
 
     return (
-      <div className="sort_container">
         <div className="sort">
             <div className="dropdown">
                 <button className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,7 +22,6 @@ function Sort(props){
                 </ul>
             </div>
         </div>
-      </div>
     )
 }
 
