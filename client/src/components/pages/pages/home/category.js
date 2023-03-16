@@ -7,6 +7,7 @@ import children from '../../../img/categories/children.jpg'
 import { useDispatch } from 'react-redux'
 import { translate } from '../../../translate'
 import { changePage } from '../../../reducers/page'
+import { filterAdd } from '../../../reducers/filter'
 
 function Categories(props){
     let dispatch = useDispatch()	  
@@ -15,7 +16,7 @@ function Categories(props){
         let subcategory = null
         let type = null
         dispatch(changePage({name: 'products'}))
-        //dispatch(filter({category, subcategory, type}))
+        dispatch(filterAdd({category, subcategory, type}))
     }
 
 	return (
@@ -23,19 +24,19 @@ function Categories(props){
             <Col sm={12}>
                 <Row>
                     <Col sm={4}>
-                        <div onClick={()=>{handleClick(men)}} className="category_box">
+                        <div onClick={()=>{handleClick('men')}} className="category_box">
                             <img src={men} alt="category"/>
                             <h4>{translate({lang: props.lang, info: "men"})}</h4>
                         </div>
                     </Col>
                     <Col sm={4}>
-                        <div onClick={()=>{handleClick(women)}} className="category_box">
+                        <div onClick={()=>{handleClick('women')}} className="category_box">
                             <img src={women} alt="category"/>
                             <h4>{translate({lang: props.lang, info: "women"})}</h4>
                         </div>
                     </Col>
                     <Col sm={4}>
-                        <div onClick={()=>{handleClick(children)}} className="category_box">
+                        <div onClick={()=>{handleClick('children')}} className="category_box">
                             <img src={children} alt="category"/>
                             <h4>{translate({lang: props.lang, info: "children"})}</h4>
                         </div>

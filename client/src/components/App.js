@@ -13,6 +13,7 @@ import Loader from './pages/partials/loader'
 import socketIOClient from "socket.io-client/dist/socket.io"
 import { getProductImages } from './utils'
 import { bringPayload, bringProducts, showProducts } from './reducers/home'
+import { addCurrency } from './reducers/settings'
 
 const socket = socketIOClient("/")
 
@@ -42,6 +43,7 @@ function App(props){
 
   	useEffect(() => {
 		dispatch(bringPayload())		
+		// dispatch(addCurrency())
 		setInterval(function () {		  
 			socket.emit('heartbeat', { data: "ping" })
 		}, 15000)

@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux'
 import { changeLanguage } from '../../../reducers/settings'
 
 function Language(props){	
-	const [lang, setlang] = useState(getCookie("shop_language") === '' ? 'ENG' : getCookie("shop_language").toUpperCase())
+	const [lang, setlang] = useState(getCookie("shop_language") === '' ? 'ENG' : getCookie("shop_language"))
 	let dispatch = useDispatch()
 
 	function handleClick(choice){
-		setlang(choice.toUpperCase())
+		setlang(choice)
 		dispatch(changeLanguage(choice))
     }
 
@@ -19,8 +19,8 @@ function Language(props){
                     {lang}
                 </button>
                 <ul className="dropdown-menu dark language" aria-labelledby="dropdownMenuButton">
-					<li onClick={()=>{handleClick('eng')}}><span>ENG</span></li>
-					<li onClick={()=>{handleClick('ro')}}><span>RO</span></li>
+					<li onClick={()=>{handleClick('ENG')}}><span>ENG</span></li>
+					<li onClick={()=>{handleClick('RO')}}><span>RO</span></li>
                 </ul>
             </div>
 		</div>

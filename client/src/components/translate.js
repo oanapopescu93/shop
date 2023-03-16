@@ -1,5 +1,5 @@
 var words = {
-    eng: {
+    ENG: {
         //home
         "about": "About",
         "about_us": "About us",
@@ -101,7 +101,7 @@ var words = {
         "sign_in": "Sign in",
         "sign_up": "Sign up",
     },
-    ro: {
+    RO: {
         //home
         "about": "Despre",
         "about_us": "About noi",
@@ -209,10 +209,8 @@ var words = {
 
 
 export const translate = function (data){
-    if(!data){
-        return
-    }
-    let lang = data.lang ? data.lang : "eng"
+    if(!data) return
+    let lang = data.lang ? data.lang : "ENG"
     let info = data.info
     return words[lang][info]
 }

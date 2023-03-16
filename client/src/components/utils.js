@@ -6,6 +6,8 @@ import product_05 from './img/products/product-5.jpg'
 import product_06 from './img/products/product-6.jpg'
 import countries from './json/countries.json';
 
+const axios = require('axios')
+
 export const isEmpty = function (element){
   let empty = true
   if(typeof element !== "undefined" && element !== 'null' && element !== null && element !== ''){
@@ -155,4 +157,33 @@ export const checkoutData = function(){
   let countries_list = Object.keys(countries.countries)
 
   return {countries_list, countries: countries.countries, monthOptions, yearOptions}
+}
+
+export const getCurrency = function(payload){    
+  return new Promise(function(resolve, reject){
+    let key = 'KCrSj0HAWJmhRHa5afGZS2AjdUBcCgXlyyILkCti'
+    let base_currency = 'RON'
+    let currencies = 'EUR%2CUSD%2CRON'
+		let url = 'https://api.freecurrencyapi.com/v1/latest?apikey=' + key + '&currencies=' + currencies + '&base_currency=' + base_currency
+		axios.get(url).then(response => {
+			resolve(response)	
+		}).catch(error => {
+			console.log('getCurrency_error--> ', error)
+			resolve(false)
+		})
+	})
+}
+
+export const calculatePriceCurrency = function(price, currency, rates){ 
+  rates = {
+    'EUR':0.203522,
+    'RON':1,
+    'USD':0.215415,
+  }   
+  let rate = 1
+  if(rates && rates[currency]){
+    rate = rates[currency]
+  }
+  let new_price = price * rate
+  return new_price.toFixed(2)
 }

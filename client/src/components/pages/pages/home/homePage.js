@@ -8,13 +8,13 @@ import Categories from './category'
 import About from './about'
 import banner_image from '../../../img/banner_model.jpg'
 import { translate } from '../../../translate'
-import { useDispatch, useSelector } from 'react-redux'
-import { addCounter, incrementCounter } from '../../../reducers/radu'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { addCounter, incrementCounter } from '../../../reducers/radu'
 
 function Homepage(props){
 	let lang = props.lang
 	let promo_list = props.promo_list
-	let dispatch = useDispatch()
+	//let dispatch = useDispatch()
 	const t = promo_list.length > 5 ? 5 : promo_list.length
 	const settings = {
 		dots: true,

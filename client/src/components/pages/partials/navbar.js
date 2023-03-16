@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/esm/Row'
 import { changePage } from '../../reducers/page'
 import { translate } from '../../translate'
 import { changeSearch } from '../../reducers/search'
-import { changeSort } from '../../reducers/sort'
+import { filterAdd } from '../../reducers/filter'
 
 function Navbar(props){	
   let object = props.category[0] 
@@ -15,8 +15,7 @@ function Navbar(props){
 
   function handleClick(category, subcategory, type){
     dispatch(changePage({name: 'products'}))
-    //dispatch(filter({category, subcategory, type}))
-    dispatch(changeSort(null))
+    dispatch(filterAdd({category, subcategory, type}))
   }
 
   function handleSearch(e){

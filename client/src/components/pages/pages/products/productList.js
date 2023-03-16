@@ -21,7 +21,7 @@ function ProductList(props){
         if (x > 0) {
             x = x - 1
             setPage(x)
-            if(x == 0){
+            if(x === 0){
                 setPagePrev('')
                 setPageNext('active')
             } else {
@@ -36,7 +36,7 @@ function ProductList(props){
         if (x < numPages - 1) {
             x = x + 1
             setPage(x)
-            if(x == numPages - 1){
+            if(x === numPages - 1){
                 setPagePrev('active')
                 setPageNext('')
             } else {
@@ -49,7 +49,7 @@ function ProductList(props){
     return <>
         {							
             products[page].map(function(item, i){
-                return <Product key={i} lang={props.lang} item={item} star_array={getStarArray(item.stars)}></Product>
+                return <Product key={i} lang={props.lang} currency={props.currency} rates={props.rates} item={item} star_array={getStarArray(item.stars)}></Product>
             })
         }
         <div className="paginationContainer">

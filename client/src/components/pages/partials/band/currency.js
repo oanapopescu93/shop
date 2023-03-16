@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux'
 import { getCookie, setCookie } from '../../../utils'
 
 function Currency(props){	
-	const [currency, setCurrency] = useState(getCookie("shop_currency") === '' ? 'EUR' : getCookie("shop_currency").toUpperCase())
+	const [currency, setCurrency] = useState(getCookie("shop_currency") === '' ? 'RON' : getCookie("shop_currency"))
 	let dispatch = useDispatch()
 
 	function handleClick(choice){
-		setCurrency(choice.toUpperCase())
+		setCurrency(choice)
 		dispatch(changeCurrency(choice))
     }
 
@@ -19,9 +19,9 @@ function Currency(props){
                     {currency}
                 </button>
                 <ul className="dropdown-menu dark currency" aria-labelledby="dropdownMenuButton">
-					<li onClick={()=>{handleClick('ron')}}><span>RON</span></li>
-					<li onClick={()=>{handleClick('eur')}}><span>EUR</span></li>
-                    <li onClick={()=>{handleClick('usd')}}><span>USD</span></li>
+					<li onClick={()=>{handleClick('RON')}}><span>RON</span></li>
+					<li onClick={()=>{handleClick('EUR')}}><span>EUR</span></li>
+                    <li onClick={()=>{handleClick('USD')}}><span>USD</span></li>
                 </ul>
             </div>
 		</div>

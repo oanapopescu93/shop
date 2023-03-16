@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
+import { changePagination } from '../../../reducers/productsPanel'
 
 function Pages(props){
     let dispatch = useDispatch()	
@@ -8,6 +9,7 @@ function Pages(props){
 
     function change(x){
         setPage(x)
+        dispatch(changePagination(x))
     }
 
     return (

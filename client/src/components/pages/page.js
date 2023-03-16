@@ -22,9 +22,11 @@ function Page(props) {
   let page = useSelector(state => state.page)
   let lang = useSelector(state => state.settings.lang)
   let currency = useSelector(state => state.settings.currency)
+  let rates = useSelector(state => state.settings.rates)
   let cart = useSelector(state => state.cartWishlist.cart)
   let filter = useSelector(state => state.filter)
-  let sort = useSelector(state => state.sort.sort)
+  let sort = useSelector(state => state.productsPanel.sort)
+  let pagination = useSelector(state => state.productsPanel.pagination)
   let search = useSelector(state => state.search.search)
   let wishlist = useSelector(state => state.cartWishlist.wishlist)
 
@@ -76,34 +78,34 @@ function Page(props) {
       <Navbar lang={lang} category={categories}></Navbar>
       {(() => { 
         if(page){
-          // return <Sign lang={lang} currency={currency} socket={props.socket}></Sign> 
+          // return <Sign lang={lang} currency={currency} rates={rates} socket={props.socket}></Sign> 
           switch (page.name) {
             case "sign":
               return <Sign lang={lang} socket={props.socket}></Sign> 
             case "product":
-              return <ProductPage lang={lang} currency={currency} socket={props.socket} products={props.products} product={page.details}></ProductPage>
+              return <ProductPage lang={lang} currency={currency} rates={rates} socket={props.socket} products={props.products} product={page.details}></ProductPage>
             case "cart":
-              return <CartPage cart={cart} lang={lang} currency={currency} socket={props.socket} shipping={shipping}></CartPage>
+              return <CartPage cart={cart} lang={lang} currency={currency} rates={rates} socket={props.socket} shipping={shipping}></CartPage>
             case "wish":
-              return <WishPage wishlist={wishlist} lang={lang} currency={currency}></WishPage>
+              return <WishPage wishlist={wishlist} lang={lang} currency={currency} rates={rates}></WishPage>
             case "checkout":
-              return <Checkout cart={cart} lang={lang} currency={currency} socket={props.socket} shipping={shipping}></Checkout>
+              return <Checkout cart={cart} lang={lang} currency={currency} rates={rates} socket={props.socket} shipping={shipping}></Checkout>
             case "about":
               return <About lang={lang}></About>
             case "contact":
               return <Contact lang={lang}></Contact>
             case "products":
-              return <Products lang={lang} currency={currency} products={products} categories={categories} filter={filter} sort={sort} search={search}></Products>
+              return <Products lang={lang} currency={currency} rates={rates} products={products} categories={categories} filter={filter} sort={sort} pagination={pagination} search={search}></Products>
             case "home":
             default:
-                return <Homepage lang={lang} currency={currency} promo_list={promoProducts}></Homepage>
+                return <Homepage lang={lang} currency={currency} rates={rates} promo_list={promoProducts}></Homepage>
           }
         } else {
-          return <Homepage lang={lang} currency={currency}></Homepage>
+          return <Homepage lang={lang} currency={currency} rates={rates}></Homepage>
         }
       })()}      
-      <Footer lang={lang} currency={currency}></Footer>
-      {!cookies ? <Cookies shop_cookies={shop_cookies} lang={lang} currency={currency}></Cookies>  : null}
+      <Footer lang={lang}></Footer>
+      {!cookies ? <Cookies shop_cookies={shop_cookies} lang={lang}></Cookies>  : null}
     </>
 	)
 }

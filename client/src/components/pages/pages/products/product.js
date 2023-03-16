@@ -6,9 +6,10 @@ import { useDispatch } from 'react-redux'
 import { cartAdd } from '../../../reducers/cartWishlist'
 import { translate } from '../../../translate'
 import { changePage } from '../../../reducers/page'
+import { calculatePriceCurrency } from '../../../utils'
 
 function Product(props) {
-  let price = props.item.price
+  let price = calculatePriceCurrency(props.item.price, props.currency, props.rates)
   let discount = props.item.discount
   let price_old = 0
   if(discount>0){

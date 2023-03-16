@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { getStarArray } from '../../../utils'
+import { calculatePriceCurrency, getStarArray } from '../../../utils'
 import Stars from '../../partials/stars'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -105,7 +105,7 @@ function Color(props){
 function Price(props){
 	let item = props.item 
 	let qty = item.qty ? item.qty : 1
-	let price = item.price * qty
+	let price = calculatePriceCurrency(item.price * qty, props.currency, props.rates)
 	let price_old = 0
 	if(item.discount>0){
 	  price_old = price + price * item.discount/100
@@ -202,7 +202,7 @@ function ProductDetails(props){
 						</p>
 					</div>
 
-					<Price lang={props.lang} item={props.product}></Price>
+					<Price lang={props.lang} item={props.product} currency={props.currency} rates={props.rates}></Price>
 					<Quantity lang={props.lang} item={props.product} update={(e)=>{updateProduct(e)}}></Quantity>
                     <Size lang={props.lang} item={props.product} update={(e)=>{updateProduct(e)}}></Size>
                     <Color lang={props.lang} item={props.product} update={(e)=>{updateProduct(e)}}></Color>  

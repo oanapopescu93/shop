@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { changeSort } from '../../../reducers/sort'
+import { changeSort } from '../../../reducers/productsPanel'
 import { translate } from '../../../translate'
 
 function Sort(props){

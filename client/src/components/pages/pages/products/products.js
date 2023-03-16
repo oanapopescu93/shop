@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useSelector} from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -10,9 +10,8 @@ import {sortList} from '../../../utils'
 import Pages from './pages'
 
 function Products(props) {
-  const {filter, sort, search} = props
+  const {filter, sort, pagination, search} = props
   const [products, setProducts] = useState([])
-  const [chunkSize, setChunkSize] = useState(12)
   let array = [...props.products]
 
   useEffect(() => {
@@ -26,7 +25,6 @@ function Products(props) {
 
       if(search !== ""){
           array = array.filter(function(x){
-              console.log(x)
               if(x.title.indexOf(search) > 0 || x.category.indexOf(search) > 0 || x.description_long.indexOf(search) > 0 || x.description_short.indexOf(search) > 0 || x.subcategory.indexOf(search) > 0 || x.type.indexOf(search) > 0){
                   return x
               }
@@ -34,11 +32,28 @@ function Products(props) {
       }
 
       if(!checkFilterEmpty()){
-        console.log('filter ', filter)
+        array = filtering(array, 'category')
+        array = filtering(array, 'subcategory')
+        array = filtering(array, 'type')
+        array = filtering(array, 'size')
+        array = filtering(array, 'color')
+        array = filtering(array, 'stars')
       }
       
       setProducts(array)
   }, [filter, sort, search])
+
+  function filtering(array, attr){
+    if(filter && filter[attr] && filter[attr].length>0){
+      return array.filter(function(x){
+        if(filter[attr].includes(x[attr])){
+          return x
+        }
+      })
+    } else {
+      return array
+    }
+  }
 
   function checkFilterEmpty(){
     if(filter.category.length === 0 && filter.color.length === 0 && filter.size.length === 0 && filter.stars.length === 0 && filter.subcategory.length === 0 && filter.type.length === 0){
@@ -63,7 +78,7 @@ function Products(props) {
               </Col>
             </Row>
             <Row>
-              {products && products.length>0 ? <ProductList lang={props.lang} products={products} chunkSize={chunkSize}></ProductList> : <Col sm={12}>                
+              {products && products.length>0 ? <ProductList lang={props.lang} products={products} chunkSize={pagination} currency={props.currency} rates={props.rates}></ProductList> : <Col sm={12}>                
                 <p>{translate({lang: props.lang, info: "no_products"})}</p>
               </Col>}
             </Row>

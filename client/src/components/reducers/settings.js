@@ -2,8 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 import { getCookie, setCookie } from '../utils'
 
 const initialState = {
-    lang: getCookie("shop_language") !== "" ? getCookie("shop_language") : "eng",
-    currency: getCookie("shop_currency") !== "" ? getCookie("shop_currency") : "eur",
+    lang: getCookie("shop_language") !== "" ? getCookie("shop_language") : "ENG",
+    currency: getCookie("shop_currency") !== "" ? getCookie("shop_currency") : "RON",
+    rates: null,
 }
 
 const settingsSlice = createSlice({
@@ -18,12 +19,20 @@ const settingsSlice = createSlice({
             state.currency = payload
             setCookie("shop_currency", payload)
         },
+        addCurrency: () => {
+            console.log("addCurrency")
+        },
+        showCurrency: (state, { payload }) => {
+            state.rates = payload
+        },
     }
 })
 
 export const {
     changeLanguage,
-    changeCurrency
+    changeCurrency,
+    addCurrency,
+    showCurrency,
 } = settingsSlice.actions
 
 export default settingsSlice.reducer
