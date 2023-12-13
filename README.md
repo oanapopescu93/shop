@@ -1,2 +1,2 @@
 # shop
-ecommerce website (NodeJS and ReactJS)
+e-commerce website with Nodejs/Express and ReactJs/Redux\

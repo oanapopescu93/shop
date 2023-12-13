@@ -1,16 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './components/App'
-
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap/dist/js/bootstrap.bundle.min"
+import ReactDOM from 'react-dom/client'
+import App from './App'
 
 import createSagaMiddleware from 'redux-saga'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
-import rootReducer from './components/reducers'
-import rootSaga from './components/sagas'
+import rootReducer from './reducers'
+import rootSaga from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = configureStore({
@@ -19,9 +16,9 @@ const store = configureStore({
 })
 sagaMiddleware.run(rootSaga)
 
-ReactDOM.render(  
-	<Provider store={store}>
+const root = ReactDOM.createRoot(document.getElementById('shop_root'))
+root.render(
+  	<Provider store={store}>
 		<App></App>
-	</Provider>,
-	document.getElementById('root')
+	</Provider>
 )
