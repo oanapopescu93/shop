@@ -1,33 +1,35 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import { changePage } from '../../reducers/page'
+import { changePage, changeSearch, changeSelectedCategory, changeSelectedSubcategory, changeSelectedType } from '../../reducers/page'
 import { translate } from '../../translations/translate'
-// import { changeSearch } from '../../reducers/search'
-// import { filterAdd } from '../../reducers/filter'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Col, Row } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
+import { Col, Row } from 'react-bootstrap'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faHeart, faUserCircle, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 
 function NavbarComponent(props){	
-    const {settings, home} = props
+    const {home, title} = props
     const [searchValue, setSearchValue] = useState('')	
     let dispatch = useDispatch()
     let categories = []
     if(home.categories && home.categories[0]){
         categories = Object.getOwnPropertyNames(home.categories[0])
-    }
-  
+    } 
 
-    function handleClick(category, subcategory, type){
-      dispatch(changePage({name: 'products'}))
-      console.log({category, subcategory, type})
-      // dispatch(filterAdd({category, subcategory, type}))
+    function handleClick(choice, category=null, subcategory=null, type=null){
+      dispatch(changePage(choice))
+      if(choice === "Products"){
+        dispatch(changeSelectedCategory(category))
+        dispatch(changeSelectedSubcategory(subcategory))
+        dispatch(changeSelectedType(type))
+      }
     }
 
-    function handleSearch(e){
-      //dispatch(changeSearch(searchValue))
+    function handleSearch(){
+      dispatch(changeSearch(searchValue))
     }
 
     function updateInputValue(e){
@@ -36,10 +38,11 @@ function NavbarComponent(props){
   
 	  return <Navbar expand="lg" className="shop_navbar">
       <Container>
-        <Navbar.Brand href="#home">Shop</Navbar.Brand>
+        <Navbar.Brand onClick={()=>handleClick('Home')}>{title}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <span onClick={()=>handleClick('Products')}>{translate({lang: props.lang, info: "all"})}</span>
             {categories.map(function(x, i){
               let subcategories = []
               if(home.categories && home.categories[0] && home.categories[0][x]){
@@ -59,7 +62,7 @@ function NavbarComponent(props){
                             }
                             return <>
                               {items.map(function(z, k){
-                                return <li onClick={()=>handleClick(x, y, z)} key={k}>{z}</li>
+                                return <li onClick={()=>handleClick('Products', x, y, z)} key={k}>{z}</li>
                               })}
                             </>
                         })()}
@@ -72,6 +75,13 @@ function NavbarComponent(props){
             })}
           </Nav>
         </Navbar.Collapse>
+        <form className="form-inline">
+          <input className="input_navbar " type="text" placeholder="Search" aria-label="Search" onChange={(e)=>{updateInputValue(e)}}/>
+          <button className="button_navbar button_color" type="button" onClick={()=>{handleSearch()}}>{translate({lang: props.lang, info: "search"})}</button>
+        </form>
+        <p><FontAwesomeIcon icon={faHeart} onClick={()=>handleClick('Wishlist')} /></p>
+        <p><FontAwesomeIcon icon={faUserCircle} onClick={()=>handleClick('User')} /></p>
+        <p><FontAwesomeIcon icon={faCartShopping} onClick={()=>handleClick('Cart')} /></p>
       </Container>
     </Navbar>
 }

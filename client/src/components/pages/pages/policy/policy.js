@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
-import { changePage } from '../../../../reducers/page'
+import { resetPage } from '../../../../reducers/page'
 import { translate } from '../../../../translations/translate'
 import PolicyEng from './policyEng'
 import PolicyRo from './policyRo'
@@ -13,7 +13,7 @@ import PolicyIt from './policyIt'
 function Policy(props){
     let dispatch = useDispatch()
     function handleBack(){
-        dispatch(changePage('Home'))
+        dispatch(resetPage('Home'))
     }
     return <div className="policy">
         <div className="page_content">

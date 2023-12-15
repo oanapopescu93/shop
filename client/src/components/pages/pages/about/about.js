@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
-import { changePage } from '../../../../reducers/page'
+import { resetPage } from '../../../../reducers/page'
 import { translate } from '../../../../translations/translate'
 import AboutEng from './aboutEng'
 import AboutRo from './aboutRo'
@@ -14,7 +14,7 @@ function About(props){
     let name = "Shop"
     let dispatch = useDispatch()
     function handleBack(){
-        dispatch(changePage('Home'))
+        dispatch(resetPage('Home'))
     }
     return <div className="about">
         <div className="page_content">

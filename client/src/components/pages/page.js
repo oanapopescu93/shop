@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Popup from '../popup/popup'
 import Choice from './choice'
 import {bringPayload} from '../../reducers/home'
+import Loader from '../partials/loader'
 
 function Page(props) {
     let home = useSelector(state => state.home)
@@ -15,8 +16,16 @@ function Page(props) {
 	}, [])       
 
     return <>
-        <Choice {...props} settings={settings} page={page} home={home}></Choice>
-        <Popup {...props} settings={settings}></Popup>
+        {(() => {
+            if(home.loaded){              
+                return <>
+                    <Choice {...props} settings={settings} page={page} home={home}></Choice>
+                    <Popup {...props} settings={settings}></Popup>
+                </>
+            } else {
+                return <Loader></Loader>
+            }
+        })()}
     </>
 }
 

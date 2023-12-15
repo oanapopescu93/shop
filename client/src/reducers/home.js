@@ -10,6 +10,7 @@ const initialState = {
     currencies: [],   
     languages: [],  
     questions: [],
+    loaded: false
 }
 
 const homeSlice = createSlice({
@@ -28,7 +29,8 @@ const homeSlice = createSlice({
             state.career = payload?.career  
             state.currencies = payload?.currencies           
             state.languages = payload?.languages        
-            state.questions = payload?.questions    
+            state.questions = payload?.questions 
+            state.loaded = true   
         },
         resetHome: () => initialState,
     }

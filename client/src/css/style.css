@@ -402,6 +402,11 @@ textarea {
   position: static!important;
 }
 
+/* STARS */
+.stars img{
+  width: 20px;
+}
+
 /* media */
 @media (max-width: 1200px){
 	

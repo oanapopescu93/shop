@@ -4,14 +4,14 @@ import {useDispatch} from 'react-redux'
 import { resetPage } from '../../../../reducers/page'
 import { translate } from '../../../../translations/translate'
 
-function Contact(props){
+function Cart(props){
     let dispatch = useDispatch()
     function handleBack(){
         dispatch(resetPage('Home'))
     }
-    return <div className="about">
+    return <div className="cart">
         <div className="page_content">
-               contact
+            <p>No list</p>
         </div>
         <div className="text_center">
             <Button type="button" onClick={()=>handleBack()} className="mybutton round button_transparent shadow_convex">
@@ -20,4 +20,4 @@ function Contact(props){
         </div>
     </div>
 }
-export default Contact
+export default Cart

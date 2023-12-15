@@ -5,6 +5,8 @@ const initialState = {
     lang: getCookie("shop_language") !== "" ? getCookie("shop_language") : "ENG",
     currency: getCookie("shop_currency") !== "" ? getCookie("shop_currency") : "RON",
     cookies: getCookie("shop_cookies") !== "" ? getCookie("shop_cookies") : "0",
+    language_array: ["ENG", "ES", "DE", "FR", "IT", "RO"],
+    currency_array: ["USD", "EUR", "RON"]
 }
 
 const settingsSlice = createSlice({

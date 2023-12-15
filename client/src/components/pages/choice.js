@@ -12,6 +12,12 @@ import Contact from './pages/contact/contact'
 import Policy from './pages/policy/policy'
 import Terms from './pages/terms/terms'
 import Questions from './pages/questions/questions'
+import Product from './pages/product/product'
+import Breadcrumbs from '../partials/breadcrumbs'
+import Products from './pages/products/products'
+import Cart from './pages/cart/cart'
+import Wishlist from './pages/wishlist/wishlist'
+import User from './pages/user/user'
 
 function Choice(props) {
     const {page, settings} = props
@@ -23,7 +29,7 @@ function Choice(props) {
 
     return <div id="page-container"> 
         <Header {...props}></Header>  
-        <NavbarComponent {...props}></NavbarComponent>  
+        <NavbarComponent {...props} title="Title"></NavbarComponent>  
         {(() => {
             switch (page.page) { 
                 case "About":
@@ -38,6 +44,19 @@ function Choice(props) {
                     return <Career {...props}></Career>
                 case "Contact":
                     return <Contact {...props}></Contact>
+                case "Products":
+                    return <Products {...props}></Products>
+                case "Product": 
+                    return <>
+                        <Breadcrumbs {...props}></Breadcrumbs>
+                        <Product {...props}></Product>
+                    </>
+                case "Cart":
+                    return <Cart {...props}></Cart>
+                case "Wishlist":
+                    return <Wishlist {...props}></Wishlist>
+                case "User":
+                    return <User {...props}></User>
                 case "Home":                               
                 default:
                     return <Home {...props}></Home>
