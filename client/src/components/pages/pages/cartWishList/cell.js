@@ -63,10 +63,10 @@ function Cell(props){
                     </Row>} 
                 </Col>
                 <Col sm={2}>
-                    <Button type="button" onClick={(e)=>moveProduct(e)} className="mybutton round button_transparent shadow_convex">
+                    <Button type="button" onClick={(e)=>moveProduct(e)} className="mybutton round button_transparent">
                         <FontAwesomeIcon icon={faHeart} />
                     </Button>
-                    <Button type="button" onClick={(e)=>deleteProduct(e)} className="mybutton round button_transparent shadow_convex">
+                    <Button type="button" onClick={(e)=>deleteProduct(e)} className="mybutton round button_transparent">
                         <FontAwesomeIcon icon={faTrash} />
                     </Button>
                 </Col>            

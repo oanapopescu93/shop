@@ -20,10 +20,10 @@ function Header(props){
 	return <div className="header">
         <Container>
             <Row>
-                <Col sm={6} className="header_left">
+                <Col sm={4} className="header_left">
                     <Settings {...props}></Settings>
                 </Col>
-                <Col sm={6} className="header_right">
+                <Col sm={8} className="header_right">
                     <ul>
                         <li><a href={'tel:' + phone.link}>{phone.text}</a></li>
                         <li><a href={'mailto:' + email.link}>{email.link}</a></li>

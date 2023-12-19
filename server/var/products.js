@@ -62,6 +62,7 @@ module.exports = Object.freeze({
             discount:10,
             qty_store:11,
             stars: 1,
+            url: "/img/products/product-1.jpg", 
         },
         {
             id: 2,
@@ -77,6 +78,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:12,
             stars: 1.5,
+            url: "/img/products/product-2.jpg", 
         },
         {
             id: 3,
@@ -92,6 +94,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:13,
             stars: 2,
+            url: "/img/products/product-3.jpg", 
         },
         {
             id: 4,
@@ -107,6 +110,7 @@ module.exports = Object.freeze({
             discount:20,
             qty_store:14,
             stars: 2.5,
+            url: "/img/products/product-4.jpg", 
         },
         {
             id: 5,
@@ -122,6 +126,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:15,
             stars: 3,
+            url: "/img/products/product-5.jpg", 
         },
         {
             id: 6,
@@ -137,6 +142,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:16,
             stars: 4,
+            url: "/img/products/product-6.jpg", 
         },
         {
             id: 7,
@@ -152,6 +158,7 @@ module.exports = Object.freeze({
             discount:10,
             qty_store:11,
             stars: 1,
+            url: "/img/products/product-1.jpg", 
         },
         {
             id: 8,
@@ -167,6 +174,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:12,
             stars: 1.5,
+            url: "/img/products/product-2.jpg", 
         },
         {
             id: 9,
@@ -182,6 +190,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:13,
             stars: 2,
+            url: "/img/products/product-3.jpg", 
         },
         {
             id: 10,
@@ -197,6 +206,7 @@ module.exports = Object.freeze({
             discount:20,
             qty_store:14,
             stars: 2.5,
+            url: "/img/products/product-4.jpg", 
         },
         {
             id: 11,
@@ -212,6 +222,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:15,
             stars: 3,
+            url: "/img/products/product-5.jpg", 
         },
         {
             id: 12,
@@ -227,6 +238,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:16,
             stars: 4,
+            url: "/img/products/product-6.jpg", 
         },
         {
             id: 13,
@@ -242,6 +254,7 @@ module.exports = Object.freeze({
             discount:10,
             qty_store:11,
             stars: 1,
+            url: "/img/products/product-1.jpg", 
         },
         {
             id: 14,
@@ -257,6 +270,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:12,
             stars: 1.5,
+            url: "/img/products/product-2.jpg", 
         },
         {
             id: 15,
@@ -272,6 +286,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:13,
             stars: 2,
+            url: "/img/products/product-3.jpg", 
         },
         {
             id: 16,
@@ -287,6 +302,7 @@ module.exports = Object.freeze({
             discount:20,
             qty_store:14,
             stars: 2.5,
+            url: "/img/products/product-4.jpg", 
         },
         {
             id: 17,
@@ -302,6 +318,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:15,
             stars: 3,
+            url: "/img/products/product-5.jpg", 
         },
         {
             id: 18,
@@ -317,6 +334,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:16,
             stars: 4,
+            url: "/img/products/product-6.jpg", 
         },
         {
             id: 20,
@@ -332,6 +350,7 @@ module.exports = Object.freeze({
             discount:10,
             qty_store:11,
             stars: 1,
+            url: "/img/products/product-1.jpg", 
         },
         {
             id: 21,
@@ -347,6 +366,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:12,
             stars: 1.5,
+            url: "/img/products/product-2.jpg", 
         },
         {
             id: 22,
@@ -362,6 +382,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:13,
             stars: 2,
+            url: "/img/products/product-3.jpg", 
         },
         {
             id: 23,
@@ -377,6 +398,7 @@ module.exports = Object.freeze({
             discount:20,
             qty_store:14,
             stars: 2.5,
+            url: "/img/products/product-4.jpg", 
         },
         {
             id: 24,
@@ -392,6 +414,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:15,
             stars: 3,
+            url: "/img/products/product-5.jpg", 
         },
         {
             id: 25,
@@ -407,6 +430,7 @@ module.exports = Object.freeze({
             discount:0,
             qty_store:16,
             stars: 4,
+            url: "/img/products/product-6.jpg", 
         },
     ],
     SHIPPING: [

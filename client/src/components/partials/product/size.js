@@ -16,7 +16,7 @@ function Size(props){
 
     return <>
         {size ? <div className="input-group list_size">
-            <DropdownButton title={size} id="language_button"  className="shadow_convex" onSelect={change}>
+            <DropdownButton title={size} id="language_button" onSelect={change}>
                 {size_list.map(function(item, i){
                     return <Dropdown.Item key={i} eventKey={item}><span>{item}</span></Dropdown.Item>
                 })}

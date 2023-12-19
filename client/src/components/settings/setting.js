@@ -23,7 +23,7 @@ function Setting(props) {
 
   return <div className={"settings_"+template}>
     <div className={template}>
-      <DropdownButton title={title} id={id}  className="shadow_convex" onSelect={handleSelect}>
+      <DropdownButton title={title} id={id} onSelect={handleSelect}>
         {array.map(function(item, i){
           return <Dropdown.Item key={i} eventKey={item}><span>{item}</span></Dropdown.Item>
         })}

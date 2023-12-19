@@ -16,7 +16,7 @@ function Color(props){
 
     return <>
         {color ? <div className="input-group list_color">            
-            <DropdownButton title={color} id="language_button"  className="shadow_convex" onSelect={change}>
+            <DropdownButton title={color} id="language_button" onSelect={change}>
                 {color_list.map(function(item, i){
                     return <Dropdown.Item key={i} eventKey={item}><span>{item}</span></Dropdown.Item>
                 })}

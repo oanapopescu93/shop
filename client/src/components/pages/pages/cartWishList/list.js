@@ -36,14 +36,12 @@ function List(props){
         {(() => {
             switch (template) {
                 case "cart":
-                    console.log(cart) 
                     return <>
                         {cart.map(function(item, i){
                             return <Cell key={i} template={template} item={item} settings={settings} updateProduct={(e)=>updateProduct(e)} deleteProduct={(e)=>deleteProduct(e)} moveProduct={(e)=>moveProduct(e)}></Cell>
                         })}  
                     </>                
                 case "wish":
-                    console.log(wish)
                     return <>
                         {wish.map(function(item, i){
                             return <Cell key={i} template={template} item={item} settings={settings} deleteProduct={(e)=>deleteProduct(e)}></Cell>

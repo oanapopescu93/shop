@@ -26,13 +26,11 @@ function Breadcrumbs(props) {
     }
 
 	return <>
-        {product && product[0] ? <div className="breadcrumbs">        
-            <Breadcrumb>
-                <Breadcrumb.Item onClick={()=>{handleClick({choice: "category", text: product[0].category})}}>{product[0].category}</Breadcrumb.Item>
-                <Breadcrumb.Item onClick={()=>{handleClick({choice: "subcategory", text: product[0].subcategory})}}>{product[0].subcategory}</Breadcrumb.Item>
-                <Breadcrumb.Item active>{product[0].type}</Breadcrumb.Item>
-            </Breadcrumb>
-        </div> : null}
+        {product && product[0] ? <Breadcrumb>
+            <Breadcrumb.Item onClick={()=>{handleClick({choice: "category", text: product[0].category})}}>{product[0].category}</Breadcrumb.Item>
+            <Breadcrumb.Item onClick={()=>{handleClick({choice: "subcategory", text: product[0].subcategory})}}>{product[0].subcategory}</Breadcrumb.Item>
+            <Breadcrumb.Item active>{product[0].type}</Breadcrumb.Item>
+        </Breadcrumb> : null}
     </>
 }
 

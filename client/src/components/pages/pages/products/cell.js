@@ -37,7 +37,7 @@ function Cell(props) {
     return <Col sm={12} md={4} lg={3}>
     <div className="product">
       <div className="product_img">
-        <img src={item.img} alt="product" onClick={()=>{handleClick('product', item.id)}}/>
+        <img src={item.url} alt="product" onClick={()=>{handleClick('product', item.id)}}/>
         {discount > 0 ? <div className="discount">{discount}%</div> : null}
       </div>
       <div className="product_info">

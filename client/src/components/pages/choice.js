@@ -13,7 +13,6 @@ import Policy from './pages/policy/policy'
 import Terms from './pages/terms/terms'
 import Questions from './pages/questions/questions'
 import Product from './pages/product/product'
-import Breadcrumbs from '../partials/breadcrumbs'
 import Products from './pages/products/products'
 import User from './pages/user/user'
 import CartWishList from './pages/cartWishList/cartWishList'
@@ -47,10 +46,7 @@ function Choice(props) {
                 case "Products":
                     return <Products {...props}></Products>
                 case "Product": 
-                    return <>
-                        <Breadcrumbs {...props}></Breadcrumbs>
-                        <Product {...props}></Product>
-                    </>
+                    return <Product {...props}></Product>
                 case "Cart":
                     return <CartWishList template="cart" {...props}></CartWishList>
                 case "Wishlist":

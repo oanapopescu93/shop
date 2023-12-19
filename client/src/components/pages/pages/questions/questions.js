@@ -27,7 +27,7 @@ function QuestionList(props){
                         let answer = item.answer
                         return <div key={j} className="question_box">
                             <div className="question_container">
-                                <div className="question_title shadow_convex" onClick={()=>handleDropdown({i, j})}>{question}</div>
+                                <div className="question_title" onClick={()=>handleDropdown({i, j})}>{question}</div>
                             </div>
                             {(() => {
                                 let open = ""
@@ -60,7 +60,7 @@ function Questions(props){
             {questions && questions[0] && questions[0][lang] ? <QuestionList lang={lang} list={questions[0][lang]}></QuestionList> : <p>{translate({lang: lang, info: "under_construction111"})}</p>}
         </div>
         <div className="text_center">
-            <Button type="button" onClick={()=>handleBack()} className="mybutton round button_transparent shadow_convex">
+            <Button type="button" onClick={()=>handleBack()} className="mybutton round button_transparent">
                 {translate({lang: lang, info: "back"})}
             </Button>
         </div>

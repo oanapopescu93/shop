@@ -37,7 +37,7 @@ function About(props){
             })()}    
         </div>
         <div className="text_center">
-            <Button type="button" onClick={()=>handleBack()} className="mybutton round button_transparent shadow_convex">
+            <Button type="button" onClick={()=>handleBack()} className="mybutton round button_transparent">
                 {translate({lang: props.lang, info: "back"})}
             </Button>
         </div>

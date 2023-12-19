@@ -8,6 +8,7 @@ import ProductDescription from './tabs/productDescription'
 import ProductAditionalInformation from './tabs/productTechnical'
 import ProductReviews from './tabs/productReviews'
 import {cartAdd, wishAdd} from '../../../../reducers/cartWishlist'
+import Breadcrumb from '../../../partials/breadcrumbs'
 
 function Product(props) {
     const {home, page, settings} = props
@@ -31,13 +32,18 @@ function Product(props) {
         }
     }
 
+    function handleClick(){
+        
+    }
+
     return <>
         {product && product[0] ? <Container>
             <Row>
                 <Col lg={4} md={4} sm={6}>
-                    <ProductImage image={null} lang={lang}></ProductImage>
+                    <ProductImage url={product[0].url} lang={lang} handleClick={()=>handleClick()}></ProductImage>
                 </Col>
                 <Col lg={8} md={8} sm={6}>
+                    <Breadcrumb {...props}></Breadcrumb>
                     <ProductDetails product={product[0]} lang={lang} handleChange={(e)=>handleChange(e)}></ProductDetails>
                 </Col>
             </Row>

@@ -25,10 +25,10 @@ function CartWishList(props){
                                 <List template={template} cart={cart} wish={wish} settings={settings}></List>
                             </Col>
                             <Col sm={4}>
-                                <Button type="button" onClick={()=>handleBack()} className="mybutton button_transparent shadow_convex">
+                                <Button type="button" onClick={()=>handleBack()} className="mybutton button_transparent">
                                     {translate({lang: lang, info: "continue_shopping"})}
                                 </Button>
-                                <Button type="button" onClick={()=>handleCheckout()} className="mybutton button_transparent shadow_convex">
+                                <Button type="button" onClick={()=>handleCheckout()} className="mybutton button_transparent">
                                     {translate({lang: lang, info: "checkout"})}
                                 </Button>
                             </Col>
@@ -42,7 +42,7 @@ function CartWishList(props){
                                 <List template={template} cart={cart} wish={wish} settings={settings}></List>
                             </Col>
                             <Col sm={4}>
-                                <Button type="button" onClick={()=>handleBack()} className="mybutton button_transparent shadow_convex">
+                                <Button type="button" onClick={()=>handleBack()} className="mybutton button_transparent">
                                     {translate({lang: lang, info: "continue_shopping"})}
                                 </Button>
                             </Col>
