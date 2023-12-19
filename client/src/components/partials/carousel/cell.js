@@ -4,7 +4,7 @@ import { translate } from '../../../translations/translate'
 import { Button} from 'react-bootstrap'
 import { cartAdd } from '../../../reducers/cartWishlist'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faHeart, faUserCircle, faCartShopping, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
+import {faCartShopping} from '@fortawesome/free-solid-svg-icons'
 
 function Cell(props) {
     const {lang, index, data, template} = props 

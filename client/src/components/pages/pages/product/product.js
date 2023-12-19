@@ -37,7 +37,7 @@ function Product(props) {
     }
 
     return <>
-        {product && product[0] ? <Container>
+        {product && product[0] ? <Container id="product_page">
             <Row>
                 <Col lg={4} md={4} sm={6}>
                     <ProductImage url={product[0].url} lang={lang} handleClick={()=>handleClick()}></ProductImage>

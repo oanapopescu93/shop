@@ -286,6 +286,9 @@ textarea {
 .breadcrumb a{
   color: var(--color_primary01);
 }
+.breadcrumb a{
+  text-decoration: underline;
+}
 
 /* POPUP */
 .mymodal{
@@ -491,6 +494,7 @@ textarea {
   border-radius: 0px;
   border: none;
   border-right: solid 1px var(--color_secundary02);
+  cursor: pointer;
 }
 .shop_navbar .nav-item-all{
   padding: var(--padding_small) var(--padding);
@@ -534,6 +538,7 @@ textarea {
 }
 .shop_navbar .icon{
   margin-left: var(--padding_small);
+  cursor: pointer;
 }
 .shop_navbar .icon svg path{
   fill: var(--color_secundary02);
@@ -654,6 +659,10 @@ textarea {
 }
 
 /* PRODUCT */
+#product_page{
+  margin-top: var(--padding);
+  margin-bottom: var(--padding);
+}
 .product_image_box{
   position: relative;
   z-index: 1;

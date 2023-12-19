@@ -6,6 +6,8 @@ import Quantity from '../../../../partials/product/quantity'
 import Size from '../../../../partials/product/size'
 import Color from '../../../../partials/product/color'
 import Price from '../../../../partials/product/price'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCartShopping, faHeart} from '@fortawesome/free-solid-svg-icons'
 
 function ProductDetails(props){
     const {product, lang} = props
@@ -60,8 +62,20 @@ function ProductDetails(props){
             <p>{description_short}</p>
         </Col>
         <Col sm={12} className="shop_button_container">
-            <Button className="shop_button" type="button" onClick={()=>{callToAction('cart')}}><i className="fa fa-shopping-basket" aria-hidden="true"></i> {translate({lang: props.lang, info: "add_to_cart"})}</Button>        
-			<Button className="shop_button" type="button" onClick={()=>{callToAction('wishlist')}}><i className="fa fa-heart" aria-hidden="true"></i> {translate({lang: props.lang, info: "add_to_wishlist"})}</Button>        
+            <Row>
+                <Col sm={6}>
+                    <Button className="mybutton button_fullcolor_dark" type="button" onClick={()=>{callToAction('cart')}}>
+                        <FontAwesomeIcon icon={faCartShopping}/>
+                        &nbsp;{translate({lang: lang, info: "add_cart"})}
+                    </Button>  
+                </Col>
+                <Col sm={6}>                     
+                    <Button className="mybutton button_fullcolor_dark" type="button" onClick={()=>{callToAction('wishlist')}}>
+                        <FontAwesomeIcon icon={faHeart}/>
+                        &nbsp;{translate({lang: lang, info: "add_cart"})}
+                    </Button>  
+                </Col>
+            </Row>
         </Col>
     </Row>
 }

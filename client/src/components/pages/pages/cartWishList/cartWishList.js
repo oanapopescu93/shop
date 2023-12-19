@@ -4,6 +4,8 @@ import {useDispatch} from 'react-redux'
 import { changePage } from '../../../../reducers/page'
 import { translate } from '../../../../translations/translate'
 import List from './list'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faBagShopping, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 
 function CartWishList(props){
     const {template, cart, wish, settings} = props
@@ -26,10 +28,12 @@ function CartWishList(props){
                             </Col>
                             <Col sm={4}>
                                 <Button type="button" onClick={()=>handleBack()} className="mybutton button_transparent">
-                                    {translate({lang: lang, info: "continue_shopping"})}
+                                    <FontAwesomeIcon icon={faCartShopping} />
+                                    &nbsp;{translate({lang: lang, info: "continue_shopping"})}
                                 </Button>
-                                <Button type="button" onClick={()=>handleCheckout()} className="mybutton button_transparent">
-                                    {translate({lang: lang, info: "checkout"})}
+                                <Button type="button" onClick={()=>handleCheckout()} className="mybutton button_fullcolor_dark">
+                                    <FontAwesomeIcon icon={faBagShopping} />
+                                    &nbsp;{translate({lang: lang, info: "checkout"})}
                                 </Button>
                             </Col>
                         </Row>
@@ -43,7 +47,8 @@ function CartWishList(props){
                             </Col>
                             <Col sm={4}>
                                 <Button type="button" onClick={()=>handleBack()} className="mybutton button_transparent">
-                                    {translate({lang: lang, info: "continue_shopping"})}
+                                    <FontAwesomeIcon icon={faCartShopping} />
+                                    &nbsp;{translate({lang: lang, info: "continue_shopping"})}
                                 </Button>
                             </Col>
                         </Row>

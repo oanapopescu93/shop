@@ -4,9 +4,12 @@ import {useDispatch} from 'react-redux'
 import Stars from '../../../partials/stars'
 import { translate } from '../../../../translations/translate'
 import { changePage, changeSelectedProduct } from '../../../../reducers/page'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCartShopping} from '@fortawesome/free-solid-svg-icons'
+import { cartAdd } from '../../../../reducers/cartWishlist'
 
 function Cell(props) {
-    const {item, lang, star_array} = props
+    const {item, lang} = props
     let price = props.item.price
     let discount = props.item.discount
     let price_old = 0
@@ -31,7 +34,7 @@ function Cell(props) {
         if(payload.color && payload.color.length>0){
             payload.color_chosen = payload.color[0]
         } 		
-        //dispatch(cartAdd(payload))
+        dispatch(cartAdd(payload))
     }    
 
     return <Col sm={12} md={4} lg={3}>
@@ -51,7 +54,10 @@ function Cell(props) {
         </div>
       </div>
       <div className="product_call_to_action">
-        <Button className="shop_button" type="button" onClick={()=>{handleAddToCart(item)}}>{translate({lang: lang, info: "add_to_cart"})}</Button>        
+        <Button className="mybutton button_fullcolor_dark" type="button" onClick={()=>{handleAddToCart(item)}}>
+          <FontAwesomeIcon icon={faCartShopping} onClick={()=>handleClick('Cart')} />
+          &nbsp;{translate({lang: lang, info: "add_cart"})}
+        </Button>        
       </div>
     </div>
 </Col>
