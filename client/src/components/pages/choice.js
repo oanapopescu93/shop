@@ -15,9 +15,9 @@ import Questions from './pages/questions/questions'
 import Product from './pages/product/product'
 import Breadcrumbs from '../partials/breadcrumbs'
 import Products from './pages/products/products'
-import Cart from './pages/cart/cart'
-import Wishlist from './pages/wishlist/wishlist'
 import User from './pages/user/user'
+import CartWishList from './pages/cartWishList/cartWishList'
+import Checkout from './pages/checkout/checkout'
 
 function Choice(props) {
     const {page, settings} = props
@@ -52,11 +52,13 @@ function Choice(props) {
                         <Product {...props}></Product>
                     </>
                 case "Cart":
-                    return <Cart {...props}></Cart>
+                    return <CartWishList template="cart" {...props}></CartWishList>
                 case "Wishlist":
-                    return <Wishlist {...props}></Wishlist>
+                    return <CartWishList template="wish" {...props}></CartWishList>
                 case "User":
                     return <User {...props}></User>
+                case "Checkout":
+                    return <Checkout {...props}></Checkout>
                 case "Home":                               
                 default:
                     return <Home {...props}></Home>

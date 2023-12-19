@@ -10,23 +10,25 @@ const cartWishlistSlice = createSlice({
     initialState,
     reducers: {
         cartAdd: (state, { payload }) => {
-            const itemInCart = state.cart.find((item) => item.id === payload.id)
-			if (itemInCart) {				
-				itemInCart.qty = itemInCart.qty + payload.qty
-			  } else {                
+            const itemInCart = state.cart.find((item) => item.id === payload.id && item.size_chosen === payload.size_chosen && item.color_chosen === payload.color_chosen)
+			if (itemInCart) {
+                itemInCart.qty = itemInCart.qty + payload.qty
+			  } else {              
 				state.cart.push({ ...payload, qty: payload.qty, cartId: state.cart.length })
 			  }
         },
         cartUpdate: (state, { payload }) => {	
-			const itemInCart = state.cart.find((item) => item.id === payload.id)
+			const itemInCart = state.cart.find((item) => item.cartId === payload.cartId)
 			if (itemInCart) {
 				itemInCart.qty = payload.qty
 				itemInCart.size_chosen = payload.size_chosen
 				itemInCart.color_chosen = payload.color_chosen
-			}
+			} else {
+                console.log('error - cartUpdate')
+            }
         },
         cartRemove: (state, { payload }) => {
-            const removeItem = state.cart.filter((item) => item.id !== payload.id)
+            const removeItem = state.cart.filter((item) => item.cartId !== payload.cartId)
       		state.cart = removeItem
         },        
         cartRemoveAll: (state) => {
@@ -34,7 +36,7 @@ const cartWishlistSlice = createSlice({
         },
 
         wishAdd: (state, { payload }) => {
-            const itemInWishlist = state.wishlist.find((item) => item.id === payload.id)
+            const itemInWishlist = state.wishlist.find((item) => item.id === payload.id && item.size_chosen === payload.size_chosen && item.color_chosen === payload.color_chosen)
 			if (itemInWishlist) {				
 				itemInWishlist.qty = itemInWishlist.qty + payload.qty
 			  } else {

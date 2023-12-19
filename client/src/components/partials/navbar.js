@@ -11,9 +11,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHeart, faUserCircle, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 
 function NavbarComponent(props){	
-    const {home, title} = props
+    const {home, title, cart, wish} = props
     const [searchValue, setSearchValue] = useState('')	
     let dispatch = useDispatch()
+    let how_many_cart = cart.length
+    let how_many_wish = wish.length
     let categories = []
     if(home.categories && home.categories[0]){
         categories = Object.getOwnPropertyNames(home.categories[0])
@@ -79,9 +81,17 @@ function NavbarComponent(props){
           <input className="input_navbar " type="text" placeholder="Search" aria-label="Search" onChange={(e)=>{updateInputValue(e)}}/>
           <button className="button_navbar button_color" type="button" onClick={()=>{handleSearch()}}>{translate({lang: props.lang, info: "search"})}</button>
         </form>
-        <p><FontAwesomeIcon icon={faHeart} onClick={()=>handleClick('Wishlist')} /></p>
-        <p><FontAwesomeIcon icon={faUserCircle} onClick={()=>handleClick('User')} /></p>
-        <p><FontAwesomeIcon icon={faCartShopping} onClick={()=>handleClick('Cart')} /></p>
+        <p>
+          <span className="icon"><FontAwesomeIcon icon={faHeart} onClick={()=>handleClick('Wishlist')} /></span>
+          {how_many_wish > 0 ? <span className="number">{how_many_wish}</span> : null}
+        </p>
+        <p>
+          <span className="icon"><FontAwesomeIcon icon={faUserCircle} onClick={()=>handleClick('User')} /></span>
+        </p>
+        <p>
+          <span className="icon"><FontAwesomeIcon icon={faCartShopping} onClick={()=>handleClick('Cart')} /></span>
+          {how_many_cart > 0 ? <span className="number">{how_many_cart}</span> : null}
+        </p>
       </Container>
     </Navbar>
 }

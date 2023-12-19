@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
 import { resetPage } from '../../../../reducers/page'
 import { translate } from '../../../../translations/translate'
@@ -15,7 +15,7 @@ function Terms(props){
     function handleBack(){
         dispatch(resetPage('Home'))
     }
-    return <div className="terms">
+    return <Container id="terms">
         <div className="page_content">
             {(() => {
                 switch (props.lang) {
@@ -40,6 +40,6 @@ function Terms(props){
                 {translate({lang: props.lang, info: "back"})}
             </Button>
         </div>
-    </div>
+    </Container>
 }
 export default Terms

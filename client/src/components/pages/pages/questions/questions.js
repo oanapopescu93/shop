@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button, Col, Row } from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
 import { changePage } from '../../../../reducers/page'
 import { translate } from '../../../../translations/translate'
@@ -11,7 +11,6 @@ function QuestionList(props){
     let list_title = Object.getOwnPropertyNames(list)
 
     function handleDropdown(x){
-        console.log('handleDropdown ', x)
         setIndex(x)
     }
 
@@ -56,7 +55,7 @@ function Questions(props){
         dispatch(changePage('Home'))
     }
 
-    return <div className="content_wrap">
+    return <Container id="questions">
         <div className="page_content">
             {questions && questions[0] && questions[0][lang] ? <QuestionList lang={lang} list={questions[0][lang]}></QuestionList> : <p>{translate({lang: lang, info: "under_construction111"})}</p>}
         </div>
@@ -65,6 +64,6 @@ function Questions(props){
                 {translate({lang: lang, info: "back"})}
             </Button>
         </div>
-    </div>
+    </Container>
 }
 export default Questions

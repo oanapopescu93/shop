@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
 import { resetPage } from '../../../../reducers/page'
 import { translate } from '../../../../translations/translate'
@@ -9,7 +9,7 @@ function Contact(props){
     function handleBack(){
         dispatch(resetPage('Home'))
     }
-    return <div className="about">
+    return <Container id="contact">
         <div className="page_content">
                contact
         </div>
@@ -18,6 +18,6 @@ function Contact(props){
                 {translate({lang: props.lang, info: "back"})}
             </Button>
         </div>
-    </div>
+    </Container>
 }
 export default Contact

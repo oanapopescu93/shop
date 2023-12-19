@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
 import { changePage } from '../../../../reducers/page'
 import { translate } from '../../../../translations/translate'
@@ -136,7 +136,7 @@ function Career(props){
         dispatch(changePage('Home'))
     }
 
-    return <div className="content_wrap">
+    return <Container id="career">
         <div className="page_content">
             {(() => {
                 if(list){
@@ -155,6 +155,6 @@ function Career(props){
                 {translate({lang: lang, info: "back"})}
             </Button>
         </div>
-    </div>
+    </Container>
 }
 export default Career
