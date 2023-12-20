@@ -11,7 +11,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHeart, faUserCircle, faCartShopping, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 
 function NavbarComponent(props){	
-    const {home, title, cart, wish} = props
+    const {home, title, cart, wish, width} = props
     const [searchValue, setSearchValue] = useState('')	
     let dispatch = useDispatch()
     let how_many_cart = cart.length
@@ -43,7 +43,7 @@ function NavbarComponent(props){
         <Navbar.Brand onClick={()=>handleClick('Home')}>{title}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          {width > 990 ? <Nav className="me-auto">
             <span className="nav-item-all" onClick={()=>handleClick('Products')}>{translate({lang: props.lang, info: "all"})}</span>
             {categories.map(function(x, i){
               let subcategories = []
@@ -77,25 +77,51 @@ function NavbarComponent(props){
                 </div>
               </NavDropdown>
             })}
-          </Nav>
+          </Nav> : <Nav className="me-auto">
+            <span className="nav-item-all" onClick={()=>handleClick('Products')}>{translate({lang: props.lang, info: "all"})}</span>
+            {categories.map(function(x, i){
+              return <span key={i} className="nav-item-all" onClick={()=>handleClick('Products')}>{translate({lang: props.lang, info: x})}</span>
+            })}
+            <form className="form-inline">
+              <input className="input_navbar " type="text" placeholder="Search" aria-label="Search" onChange={(e)=>{updateInputValue(e)}}/>
+              <button className="button_navbar button_color" type="button" onClick={()=>{handleSearch()}}>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </button>
+            </form>
+            <div className="icon_list">
+              <div className="icon_container">
+                <span className="icon"><FontAwesomeIcon icon={faHeart} onClick={()=>handleClick('Wishlist')} /></span>
+                {how_many_wish > 0 ? <span className="number">{how_many_wish}</span> : null}
+              </div>
+              <div className="icon_container">
+                <span className="icon"><FontAwesomeIcon icon={faUserCircle} onClick={()=>handleClick('User')} /></span>
+              </div>
+              <div className="icon_container">
+                <span className="icon"><FontAwesomeIcon icon={faCartShopping} onClick={()=>handleClick('Cart')} /></span>
+                {how_many_cart > 0 ? <span className="number">{how_many_cart}</span> : null}
+              </div>
+            </div>
+          </Nav>}
         </Navbar.Collapse>
-        <form className="form-inline">
-          <input className="input_navbar " type="text" placeholder="Search" aria-label="Search" onChange={(e)=>{updateInputValue(e)}}/>
-          <button className="button_navbar button_color" type="button" onClick={()=>{handleSearch()}}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-        </form>
-        <div className="icon_container">
-          <span className="icon"><FontAwesomeIcon icon={faHeart} onClick={()=>handleClick('Wishlist')} /></span>
-          {how_many_wish > 0 ? <span className="number">{how_many_wish}</span> : null}
-        </div>
-        <div className="icon_container">
-          <span className="icon"><FontAwesomeIcon icon={faUserCircle} onClick={()=>handleClick('User')} /></span>
-        </div>
-        <div className="icon_container">
-          <span className="icon"><FontAwesomeIcon icon={faCartShopping} onClick={()=>handleClick('Cart')} /></span>
-          {how_many_cart > 0 ? <span className="number">{how_many_cart}</span> : null}
-        </div>
+        {width > 990 ? <>
+          <form className="form-inline">
+            <input className="input_navbar " type="text" placeholder="Search" aria-label="Search" onChange={(e)=>{updateInputValue(e)}}/>
+            <button className="button_navbar button_color" type="button" onClick={()=>{handleSearch()}}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+          </form>
+          <div className="icon_container">
+            <span className="icon"><FontAwesomeIcon icon={faHeart} onClick={()=>handleClick('Wishlist')} /></span>
+            {how_many_wish > 0 ? <span className="number">{how_many_wish}</span> : null}
+          </div>
+          <div className="icon_container">
+            <span className="icon"><FontAwesomeIcon icon={faUserCircle} onClick={()=>handleClick('User')} /></span>
+          </div>
+          <div className="icon_container">
+            <span className="icon"><FontAwesomeIcon icon={faCartShopping} onClick={()=>handleClick('Cart')} /></span>
+            {how_many_cart > 0 ? <span className="number">{how_many_cart}</span> : null}
+          </div>
+        </> : null}
       </Container>
     </Navbar>
 }

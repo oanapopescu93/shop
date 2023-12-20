@@ -26,43 +26,47 @@ function Choice(props) {
         dispatch(changeCookies())
     }    
 
-    return <div id="page-container"> 
-        <Header {...props}></Header>  
-        <NavbarComponent {...props} title="Title"></NavbarComponent>  
-        {(() => {
-            switch (page.page) { 
-                case "About":
-                    return <About {...props}></About>
-                case "Terms":
-                    return <Terms {...props}></Terms>
-                case "Policy":
-                    return <Policy {...props}></Policy>
-                case "Questions":
-                    return <Questions {...props}></Questions>
-                case "Career":
-                    return <Career {...props}></Career>
-                case "Contact":
-                    return <Contact {...props}></Contact>
-                case "Products":
-                    return <Products {...props}></Products>
-                case "Product": 
-                    return <Product {...props}></Product>
-                case "Cart":
-                    return <CartWishList template="cart" {...props}></CartWishList>
-                case "Wishlist":
-                    return <CartWishList template="wish" {...props}></CartWishList>
-                case "User":
-                    return <User {...props}></User>
-                case "Checkout":
-                    return <Checkout {...props}></Checkout>
-                case "Home":                               
-                default:
-                    return <Home {...props}></Home>
-            }
-        })()}        
+    return <> 
+        <div className="header_container">
+            <Header {...props}></Header>  
+            <NavbarComponent {...props} title="Title"></NavbarComponent>  
+        </div>
+        <div className="page">
+            {(() => {
+                switch (page.page) { 
+                    case "About":
+                        return <About {...props}></About>
+                    case "Terms":
+                        return <Terms {...props}></Terms>
+                    case "Policy":
+                        return <Policy {...props}></Policy>
+                    case "Questions":
+                        return <Questions {...props}></Questions>
+                    case "Career":
+                        return <Career {...props}></Career>
+                    case "Contact":
+                        return <Contact {...props}></Contact>
+                    case "Products":
+                        return <Products {...props}></Products>
+                    case "Product": 
+                        return <Product {...props}></Product>
+                    case "Cart":
+                        return <CartWishList template="cart" {...props}></CartWishList>
+                    case "Wishlist":
+                        return <CartWishList template="wish" {...props}></CartWishList>
+                    case "User":
+                        return <User {...props}></User>
+                    case "Checkout":
+                        return <Checkout {...props}></Checkout>
+                    case "Home":                               
+                    default:
+                        return <Home {...props}></Home>
+                }
+            })()}  
+        </div>      
         {settings.cookies !== '1' ? <Cookies lang={settings.lang} cookiesClick={()=>handleCookiesClick()}></Cookies> : null}
         <Footer lang={settings.lang}></Footer>
-    </div>
+    </>
 }
 
 export default Choice

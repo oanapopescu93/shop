@@ -6,6 +6,9 @@ const initialState = {
     selectedCategory: null,
     selectedSubcategory: null,
     selectedType: null,
+    selectedSize: null,
+    selectedColor: null,
+    selectedScore: null,
     search: ''
 }
 
@@ -28,6 +31,15 @@ const pageSlice = createSlice({
         changeSelectedType: (state, { payload }) => {
             state.selectedType = payload
         },
+        changeSelectedSize: (state, { payload }) => {
+            state.selectedSize = payload
+        },
+        changeSelectedColor: (state, { payload }) => {
+            state.selectedColor = payload
+        },
+        changeSelectedScore: (state, { payload }) => {
+            state.selectedScore = payload
+        },
         changeSearch: (state, { payload }) => {
             state.search = payload
         },
@@ -41,6 +53,9 @@ export const {
     changeSelectedCategory,
     changeSelectedSubcategory,
     changeSelectedType,
+    changeSelectedSize,
+    changeSelectedColor,
+    changeSelectedScore,
     changeSearch,
     resetPage
 } = pageSlice.actions

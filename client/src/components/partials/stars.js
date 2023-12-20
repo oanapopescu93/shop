@@ -4,20 +4,27 @@ import star_half from '../../img/icons_other/rating/star_half.png'
 import star_empty from '../../img/icons_other/rating/star_empty.png'
 
 function Stars(props){
-	let score = parseInt(props.score)
+	let score = props.score
     let max = props.max ? parseInt(props.max) : 5
     let stars = []
+    let first = true
     for(let i =1; i<=max; i++){
         let x = parseInt(i)
         let t = Math.floor(score)  
-        if(x<score){
+        let decimals = score % 1
+        if(x < t){
             stars.push(2)
-        } else {
-            if(x<=t){
-                stars.push(1)
+        } else {   
+            if(first){
+                if(decimals === 0){
+                    stars.push(2)
+                } else {
+                    stars.push(1)
+                }
             } else {
                 stars.push(0)
-            }
+            }   
+            first = false
         }        
     }
 

@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import List from './list'
 import { translate } from '../../../../translations/translate'
-import { Row, Col } from 'react-bootstrap'
 import Panel from './panel'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 function Products(props) {
     const {home} = props
     const [list, setList] = useState(home.products)
     const [loaded, setLoaded] = useState(false)
+    const [buttonTop, setButtonTop] = useState(false)
     
     useEffect(() => {
 		handleFilter()
@@ -20,18 +22,27 @@ function Products(props) {
         setLoaded(true) 
     }
 
-    return <Row> 
+    useEffect(() => {
+		if(window){
+            const handleScroll = ()=>{
+                window.pageYOffset > 300 ? setButtonTop(true) : setButtonTop(false)
+            }
+            window.addEventListener('scroll', handleScroll)
+            return () => {
+                window.removeEventListener('scroll', handleScroll)
+            }  
+        }
+	}, []) 
+
+    return <div className="products_container">
         {loaded ? <>
             {list && list.length>0 ? <>
-                <Col lg={4} md={4} sm={6}>
-                    <Panel {...props}></Panel>
-                </Col>
-                <Col lg={8} md={8} sm={6}>
-                    <List list={list} {...props}></List>
-                </Col>
+                {buttonTop ? <div id="top"><FontAwesomeIcon icon={faArrowUp} /></div> : null}
+                <Panel {...props}></Panel>
+                <List list={list} {...props}></List>
             </> : <p>{translate({lang: props.lang, info: "no_products"})}</p>}
         </> : <p>{translate({lang: props.lang, info: "loading"})}</p>}
-    </Row>
+    </div>
 }
 
 export default Products

@@ -43,9 +43,9 @@ function Cell(props) {
         <img src={item.url} alt="product" onClick={()=>{handleClick('product', item.id)}}/>
         {discount > 0 ? <div className="discount">{discount}%</div> : null}
       </div>
-      <div className="product_info">
-        <Stars score={item.stars}></Stars>
+      <div className="product_info">        
         <h4 className="product_title">{item.title}</h4>
+        <Stars score={item.stars}></Stars>
         <div className="product_prices">
           {price_old > 0 ? <>                  
             <span className="product_price_old">{price_old}</span>

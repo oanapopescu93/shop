@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useMemo} from 'react'
+import React, {useRef, useEffect} from 'react'
 
 function ProductImage(props){
     const {url} = props
