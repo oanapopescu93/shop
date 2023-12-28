@@ -75,8 +75,8 @@ function ProductImage(props){
     }
 
     return <div className="product_image_box">
-        <img ref={imageRef} src={url} alt="product_image" onClick={()=>handleClick()}/>
-        <canvas ref={canvasRef} className="canvas_image" />
+        <img ref={imageRef} src={url ? url : "/img/products/nopicture.gif"} alt="product_image" onClick={()=>handleClick()}/>
+        {url ? <canvas ref={canvasRef} className="canvas_image" /> : null}
     </div>
 }
 

@@ -29,7 +29,7 @@ function Cell(props){
 
     return <Row className="cart_wish_cell">
         <Col sm={4} className="cart_wish_cell_image">
-            {item.url ? <img src={item.url} alt="image_cart"/> : <p>{translate({lang: props.lang, info: "error"})}</p>}
+            <img src={item.url ? item.url : "/img/products/nopicture.gif"} alt="image_cart"/>
         </Col>
         <Col sm={8} className="cart_wish_cell_info">
             <Row>

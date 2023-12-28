@@ -31,7 +31,7 @@ function Cell(props) {
                     return <div className="cell_promo_container">
                         <div className="cell_promo">
                             <div className="cell_image">
-                                <img src={data.url} alt="image_promo"/>
+                                <img src={data.url ? data.url : "/img/products/nopicture.gif"} alt="image_promo"/>
                             </div>
                             <div className="cell_button">
                                 <Button 
